@@ -1,0 +1,16 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Nazmul <sisil8sisil@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "live-server public",
+    "watch:sass":
+      "node-sass ./src/styles/sass/main.scss ./temp/styles/from_sass.css"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.0",
+    "node-sass": "^4.8.3"
+  }
+}
