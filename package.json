@@ -7,7 +7,7 @@
   "scripts": {
     "server": "live-server public",
     "watch:sass":
-      "node-sass ./src/styles/sass/main.scss ./temp/styles/from_sass.css"
+      "node-sass ./src/styles/sass/main.scss ./temp/styles/from_sass.css -w"
   },
   "devDependencies": {
     "live-server": "^1.2.0",
