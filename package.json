@@ -6,10 +6,10 @@
   "license": "MIT",
   "scripts": {
     "server": "live-server public",
-    "watch:sass":
-      "node-sass ./src/styles/sass/main.scss ./temp/styles/from_sass.css -w"
+    "watch:sass": "node-sass ./src/styles/sass/main.scss ./temp/styles/from_sass.css -w"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "live-server": "^1.2.0",
     "node-sass": "^4.8.3"
   }
