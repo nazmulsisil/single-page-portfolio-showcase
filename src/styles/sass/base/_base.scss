@@ -1,11 +1,8 @@
-// Base design for universal selectors
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: inherit;
-}
+.header {
+  backdrop-filter: blur(2px);
+  background-color: rgba($main-blue, 0.2);
 
-body {
-  font-family: sans-serif;
-  box-sizing: border-box;
+  &--top {
+    @include abs-center;
+  }
 }

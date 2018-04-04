@@ -435,9 +435,17 @@ cliui@^3.2.0:
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
 
+clone-buffer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/clone-buffer/-/clone-buffer-1.0.0.tgz#e3e25b207ac4e701af721e2cb5a16792cac3dc58"
+
 clone-stats@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/clone-stats/-/clone-stats-0.0.1.tgz#b88f94a82cf38b8791d58046ea4029ad88ca99d1"
+
+clone-stats@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/clone-stats/-/clone-stats-1.0.0.tgz#b3782dff8bb5474e18b9b6bf0fdfe782f8777680"
 
 clone@^0.2.0:
   version "0.2.0"
@@ -446,6 +454,18 @@ clone@^0.2.0:
 clone@^1.0.0, clone@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
+
+clone@^2.1.1:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+
+cloneable-readable@^1.0.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/cloneable-readable/-/cloneable-readable-1.1.2.tgz#d591dee4a8f8bc15da43ce97dceeba13d43e2a65"
+  dependencies:
+    inherits "^2.0.1"
+    process-nextick-args "^2.0.0"
+    readable-stream "^2.3.5"
 
 co@^4.6.0:
   version "4.6.0"
@@ -497,6 +517,12 @@ component-emitter@^1.2.1:
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
+
+concat-with-sourcemaps@^1.0.0:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.0.5.tgz#8964bc2347d05819b63798104d87d6e001bed8d0"
+  dependencies:
+    source-map "^0.6.1"
 
 connect@3.5.x:
   version "3.5.1"
@@ -1166,6 +1192,14 @@ graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
 
+gulp-concat@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/gulp-concat/-/gulp-concat-2.6.1.tgz#633d16c95d88504628ad02665663cee5a4793353"
+  dependencies:
+    concat-with-sourcemaps "^1.0.0"
+    through2 "^2.0.0"
+    vinyl "^2.0.0"
+
 gulp-postcss@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/gulp-postcss/-/gulp-postcss-7.0.1.tgz#3f1c36db1197140c399c252ddff339129638e395"
@@ -1176,7 +1210,17 @@ gulp-postcss@^7.0.1:
     postcss-load-config "^1.2.0"
     vinyl-sourcemaps-apply "^0.2.1"
 
-gulp-util@^3.0.0:
+gulp-sass@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/gulp-sass/-/gulp-sass-3.2.1.tgz#2e3688a96fd8be1c0c01340750c191b2e79fab94"
+  dependencies:
+    gulp-util "^3.0"
+    lodash.clonedeep "^4.3.2"
+    node-sass "^4.8.3"
+    through2 "^2.0.0"
+    vinyl-sourcemaps-apply "^0.2.0"
+
+gulp-util@^3.0, gulp-util@^3.0.0:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
   dependencies:
@@ -2503,7 +2547,7 @@ pretty-hrtime@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
 
-process-nextick-args@~2.0.0:
+process-nextick-args@^2.0.0, process-nextick-args@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
 
@@ -2581,7 +2625,7 @@ read-pkg@^1.0.0:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5:
+readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.3.5:
   version "2.3.5"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.5.tgz#b4f85003a938cbb6ecbce2a124fb1012bd1a838d"
   dependencies:
@@ -2658,6 +2702,10 @@ repeating@^2.0.0:
 replace-ext@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-0.0.1.tgz#29bbd92078a739f0bcce2b4ee41e837953522924"
+
+replace-ext@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
 request@2:
   version "2.85.0"
@@ -3317,7 +3365,7 @@ vinyl-fs@^0.3.0:
     through2 "^0.6.1"
     vinyl "^0.4.0"
 
-vinyl-sourcemaps-apply@^0.2.1:
+vinyl-sourcemaps-apply@^0.2.0, vinyl-sourcemaps-apply@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vinyl-sourcemaps-apply/-/vinyl-sourcemaps-apply-0.2.1.tgz#ab6549d61d172c2b1b87be5c508d239c8ef87705"
   dependencies:
@@ -3337,6 +3385,17 @@ vinyl@^0.5.0:
     clone "^1.0.0"
     clone-stats "^0.0.1"
     replace-ext "0.0.1"
+
+vinyl@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vinyl/-/vinyl-2.1.0.tgz#021f9c2cf951d6b939943c89eb5ee5add4fd924c"
+  dependencies:
+    clone "^2.1.1"
+    clone-buffer "^1.0.0"
+    clone-stats "^1.0.0"
+    cloneable-readable "^1.0.0"
+    remove-trailing-separator "^1.0.1"
+    replace-ext "^1.0.0"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"

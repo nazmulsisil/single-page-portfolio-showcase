@@ -6,13 +6,9 @@ $myVar: #294926;
   left: 0;
 }
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: inherit;
-}
+.footer {
+  display: grid;
 
-body {
   a {
     color: rgba($myVar, 0.8);
     @mixin callMe;

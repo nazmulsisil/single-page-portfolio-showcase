@@ -9,9 +9,9 @@ steps to set up the boilerplate
 node-sass
 [no dependency]
 node-sass: take files
-from ./src/styles/sass/main.scss
+from ./src/styles/sass/from_sass.scss
 to ./temp/styles/from_sass.css
-notes: completed and added script in package.json file which will automatically combine all files into a single file called "main.scss" and then convert that file to regular css file named "from_sass.css", but still live-server is not detecting css file changes because css files hasnt been transported to public folder where live-server is pointing to. So gulp task will do it, or concat will do it.
+notes: completed and added script in package.json file which will automatically combine all files into a single file called "from_sass.scss" and then convert that file to regular css file named "from_sass.css", but still live-server is not detecting css file changes because css files hasnt been transported to public folder where live-server is pointing to. So gulp task will do it, or concat will do it.
 
 gulp
 [no-dependency]
