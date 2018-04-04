@@ -9,8 +9,15 @@
     "watch:sass": "node-sass ./src/styles/sass/main.scss ./temp/styles/from_sass.css -w"
   },
   "devDependencies": {
+    "autoprefixer": "^8.2.0",
     "gulp": "^3.9.1",
+    "gulp-postcss": "^7.0.1",
     "live-server": "^1.2.0",
-    "node-sass": "^4.8.3"
+    "node-sass": "^4.8.3",
+    "postcss-hexrgba": "^1.0.0",
+    "postcss-import": "^11.1.0",
+    "postcss-mixins": "^6.2.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-simple-vars": "^4.1.0"
   }
 }

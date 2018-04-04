@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+body a {
+    color: rgba(41,73,38, 0.8);
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+  }
