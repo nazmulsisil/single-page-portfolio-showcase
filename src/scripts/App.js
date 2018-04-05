@@ -1,1 +1,5 @@
-console.log("i m from src/App.js am i?");
+import Person from "./modules/Person";
+
+const sisil = new Person("sisil");
+
+console.log(sisil.selfDescription());

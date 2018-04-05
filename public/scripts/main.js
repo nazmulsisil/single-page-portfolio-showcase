@@ -76,9 +76,22 @@
   !*** ./src/scripts/App.js ***!
   \****************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log(\"i m from src/App.js am i?\");\r\n\n\n//# sourceURL=webpack:///./src/scripts/App.js?");
+"use strict";
+eval("\n\nvar _Person = __webpack_require__(/*! ./modules/Person */ \"./src/scripts/modules/Person.js\");\n\nvar _Person2 = _interopRequireDefault(_Person);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar sisil = new _Person2.default(\"sisil\");\n\nconsole.log(sisil.selfDescription());\n\n//# sourceURL=webpack:///./src/scripts/App.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/modules/Person.js":
+/*!***************************************!*\
+  !*** ./src/scripts/modules/Person.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar Person = function () {\n  function Person(name) {\n    _classCallCheck(this, Person);\n\n    this.name = name;\n    this.selfDescription();\n  }\n\n  _createClass(Person, [{\n    key: \"selfDescription\",\n    value: function selfDescription() {\n      return \"i m \" + this.name + \" from a method of Person class of Person.js\";\n    }\n  }]);\n\n  return Person;\n}();\n\nexports.default = Person;\n\n//# sourceURL=webpack:///./src/scripts/modules/Person.js?");
 
 /***/ })
 
