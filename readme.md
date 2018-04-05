@@ -35,7 +35,7 @@ to `./temp/styles/from_postcss.css`
 **notes:** completed webpack and gulp setup to watch src/scripts/\*_/_.js, then bundle, then refresh browsersync
 
 **babel**
-**notes:** completed babel setup which auto compiles and gulp watch everything and refresh page.
+**notes:** completed babel setup which auto compiles and gulp watch everything and refresh page!
 
 ### TO DO
 
