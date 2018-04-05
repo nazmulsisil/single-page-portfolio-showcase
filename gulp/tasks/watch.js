@@ -26,6 +26,10 @@ function watchAll() {
       gulp.start("cssInject");
     }
   );
+
+  watch("./src/scripts/**/*.js", function() {
+    gulp.start("refreshAfterBundling");
+  });
 }
 
 gulp.task("cssInject", ["styles-final"], function() {
@@ -34,35 +38,6 @@ gulp.task("cssInject", ["styles-final"], function() {
   gulp.src("./public/styles/style.css").pipe(browsersync.stream());
 });
 
-// var gulp = require("gulp"),
-//   watch = require("gulp-watch"),
-//   browsersync = require("browser-sync").create();
-
-// gulp.task("watch", function() {
-//   browsersync.init({
-//     notify: false,
-//     server: {
-//       baseDir: "app"
-//     }
-//   });
-
-//   watch("./app/index.html", function() {
-//     browsersync.reload();
-//   });
-
-//   watch("./app/assets/styles/**/*.css", function() {
-//     gulp.start("cssInject");
-//   });
-
-//   watch("./app/assets/scripts/**/*.js", function() {
-//     gulp.start("scriptRefresh");
-//   });
-// });
-
-// gulp.task("cssInject", ["styles"], function() {
-//   gulp.src("./app/temp/styles/styles.css").pipe(browsersync.stream());
-// });
-
-// gulp.task("scriptRefresh", ["jsBundled"], function() {
-//   browsersync.reload();
-// });
+gulp.task("refreshAfterBundling", ["bundleScript"], function() {
+  browsersync.reload();
+});

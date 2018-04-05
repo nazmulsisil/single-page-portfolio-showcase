@@ -31,4 +31,9 @@ to `./temp/styles/from_postcss.css`
 **css injection** <br />
 **Notes:** Completed watching for changes in css, scss, sass files and folders with gulp-watch, and inject the styles code by browsersynd.stream()
 
+**Webpack**
+**Notes:** completed webpack and gulp setup to watch src/scripts/\*_/_.js, then bundle, then refresh browsersync
+
 ### TO DO
+
+**babel**
