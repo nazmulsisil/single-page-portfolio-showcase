@@ -18,6 +18,8 @@ gulp.task(
 );
 
 function concatSassAndPostcssAndMoveFinally() {
+  console.log("i m from styles-final");
+
   return gulp
     .src(["./temp/styles/from_sass.css", "./temp/styles/from_postcss.css"])
     .pipe(concat("style.css"))
