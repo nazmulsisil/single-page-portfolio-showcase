@@ -6,15 +6,16 @@
   "license": "MIT",
   "scripts": {
     "server": "live-server public",
-    "watch:sass":
-      "node-sass ./src/styles/sass/from_sass.scss ./public/styles/style.css -w"
+    "watch:sass": "node-sass ./src/styles/sass/from_sass.scss ./public/styles/style.css -w"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
+    "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-postcss": "^7.0.1",
     "gulp-sass": "^3.2.1",
+    "gulp-watch": "^5.0.0",
     "live-server": "^1.2.0",
     "node-sass": "^4.8.3",
     "postcss-hexrgba": "^1.0.0",

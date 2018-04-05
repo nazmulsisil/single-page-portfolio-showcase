@@ -23,7 +23,10 @@ from src/styles/postcss/from_postcss.css
 to ./temp/styles/from_postcss.css
 notes: completed postcss set up and compilation to a single file into temp folder. I used postcss nested, simple-vars, mixins, hexrgba, autoprefixer
 
+take temp files and move to public folder
+
 ~~~~TO DO~~~~
 
-* take temp files and move to public folder
 * gulp-watch
+* browsersync
+* css injection
