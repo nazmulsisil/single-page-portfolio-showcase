@@ -1,0 +1,37 @@
+@keyframes tooltip {
+  0% {
+    transform: translate(-50%, -110%) scale(0) rotate(30deg) rotateX(90deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translate(-50%, -110%) scale(1) rotate(-10deg) rotateX(-2deg);
+    opacity: 1;
+  }
+
+  70% {
+    transform: translate(-50%, -110%) rotate(3deg);
+  }
+
+  100% {
+    transform: translate(-50%, -110%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dropdown {
+  0% {
+    transform: rotateY(90deg) rotateX(25deg);
+  }
+
+  100% {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+}
+
+@keyframes container-in {
+  0% {
+  }
+  100% {
+  }
+}

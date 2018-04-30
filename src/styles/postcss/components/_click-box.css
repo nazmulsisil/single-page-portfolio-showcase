@@ -1,0 +1,9 @@
+.click-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .appear-on-click {
+    @mixin tester;
+    margin: 0.5rem;
+  }
+}

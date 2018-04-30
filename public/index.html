@@ -7,11 +7,192 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="./styles/style.css">
-  <title>Boilerplate</title>
+  <title>Notification Spinner Modal</title>
 </head>
 
 <body>
-  <h1>Hello World!!</h1>
+
+  <div class="wrapper wrapper--main">
+
+    <div class="design-list">
+      <div class="list">
+        <div class="list__headline">Projects</div>
+        <li class="list__item" data-todel="notification">Notification bar</li>
+        <li class="list__item" data-todel="spinner">Spinner</li>
+        <li class="list__item" data-todel="append-div">Append div</li>
+        <li class="list__item" data-todel="drop-down">Dropdown menu</li>
+        <li class="list__item" data-todel="reaction">Reaction</li>
+        <li class="list__item" data-todel="tennis">tennis</li>
+        <li class="list__item list__item--active" data-todel="paranoid">paranoid</li>
+
+      </div>
+    </div>
+
+    <div class="design-items">
+
+      <div class="container container--hidden" id="notification">
+        <div class="container__content">
+          <ul class="notification-bar">
+
+            <li class="notification-bar__item">
+              <div class="icon-holder">
+                <div class="icon-holder__pic">
+                  <svg class="icon icon-home icon-holder__icon">
+                    <use xlink:href="./img/symbol-defs.svg#icon-home"></use>
+                  </svg>
+                </div>
+              </div>
+            </li>
+
+            <li class="notification-bar__item">
+              <div class="icon-holder">
+                <div class="icon-holder__pic">
+                  <svg class="icon icon-hipster icon-holder__icon">
+                    <use xlink:href="./img/symbol-defs.svg#icon-hipster"></use>
+                  </svg>
+                </div>
+              </div>
+            </li>
+
+            <li class="notification-bar__item">
+              <div class="icon-holder">
+                <div class="icon-holder__pic">
+                  <svg class="icon icon-stats-dots icon-holder__icon">
+                    <use xlink:href="./img/symbol-defs.svg#icon-stats-dots"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="notification-bar__tooltip">
+                <ul class="notification-bar notification-bar--small notification-bar--small--texed">
+
+                  <li class="notification-bar__item notification-bar--small__item">
+                    <div class="icon-holder">
+                      <div class="icon-holder__pic">
+                        <svg class="icon icon-play3 icon-holder__icon">
+                          <use xlink:href="./img/symbol-defs.svg#icon-play3"></use>
+                        </svg>
+                      </div>
+                      <span class="icon-holder__text">9</span>
+                    </div>
+                  </li>
+
+                  <li class="notification-bar__item notification-bar--small__item">
+                    <div class="icon-holder">
+                      <div class="icon-holder__pic">
+                        <svg class="icon icon-pause2 icon-holder__icon">
+                          <use xlink:href="./img/symbol-defs.svg#icon-pause2"></use>
+                        </svg>
+                      </div>
+                      <span class="icon-holder__text">9</span>
+                    </div>
+                  </li>
+
+                  <li class="notification-bar__item notification-bar--small__item">
+                    <div class="icon-holder">
+                      <div class="icon-holder__pic">
+                        <svg class="icon icon-stop2 icon-holder__icon">
+                          <use xlink:href="./img/symbol-defs.svg#icon-stop2"></use>
+                        </svg>
+                      </div>
+                      <span class="icon-holder__text">9</span>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+
+            <li class="notification-bar__item">
+              <div class="icon-holder">
+                <div class="icon-holder__pic">
+                  <svg class="icon icon-bubbles2 icon-holder__icon">
+                    <use xlink:href="./img/symbol-defs.svg#icon-bubbles2"></use>
+                  </svg>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="container container--hidden" id="spinner">
+        <div class="content">
+          <div class="spinners">
+            <div class="spinner1">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container container--hidden" id="append-div">
+        <div class="content">
+          <div class="click-box">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container container--hidden" id="drop-down">
+        <div class="content">
+          <div class="navbar">
+
+            <li class="navbar__item">
+              <span class="navbar__item-text">Services</span>
+              <ul class="navbar__link-group">
+                <li class="navbar__link">link1</li>
+                <li class="navbar__link">link2</li>
+                <li class="navbar__link">link3</li>
+                <li class="navbar__link">link4</li>
+                <li class="navbar__link">link5</li>
+              </ul>
+            </li>
+
+            <li class="navbar__item">
+              <span class="navbar__item-text">Products</span>
+              <ul class="navbar__link-group">
+                <li class="navbar__link">link1</li>
+                <li class="navbar__link">link2</li>
+                <li class="navbar__link">link3</li>
+                <li class="navbar__link">link4</li>
+                <li class="navbar__link">link5</li>
+              </ul>
+            </li>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container container--hidden colored" id="reaction">
+        <div class="reaction">
+          <div class="info">
+            <div class="info__reaction-time">
+              <span class="info__text">You took &rarr;</span>
+              <span class="info__num" id="reaction-time">0.00</span>
+            </div>
+            <div class="info__best">
+              <span class="info__num" id="reaction-record">0.00</span>
+              <span class="info__text">&larr; Best score</span>
+            </div>
+          </div>
+          <div class="target">Click Here!</div>
+        </div>
+      </div>
+
+      <div class="container container--hidden" id="tennis">
+        <canvas id="tennis-canvas" width="800" height="600"></canvas>
+      </div>
+
+      <div class="container" id="paranoid">
+        <canvas id="paranoid-canvas" width="800" height="600"></canvas>
+      </div>
+
+    </div>
+  </div>
+
+
 
   <script src="./scripts/main.js"></script>
 </body>

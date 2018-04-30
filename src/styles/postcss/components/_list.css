@@ -1,0 +1,37 @@
+.list {
+  user-select: none;
+  position: fixed;
+  top: $bodyPadding;
+  left: $bodyPadding;
+  width: $left-side-width;
+  background: #b9c7d3;
+  min-height: calc(100vh - ($bodyPadding * 2));
+
+  &__headline {
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+  &__item {
+    cursor: pointer;
+    text-transform: uppercase;
+    word-break: break-all;
+    hyphens: auto;
+    list-style: none;
+    font-size: 1.4rem;
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+    color: $text-4;
+    background-color: rgba($list-bg, 0.3);
+    border-radius: 2px;
+
+    &--active {
+      color: $text-2;
+      background-color: rgba($list-bg, 1);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

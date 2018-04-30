@@ -1,5 +1,6 @@
 var gulp = require("gulp"),
   postcss = require("gulp-postcss"),
+  forLoop = require("postcss-for"),
   autoprefixer = require("autoprefixer"),
   cssvars = require("postcss-simple-vars"),
   nested = require("postcss-nested"),
@@ -36,7 +37,17 @@ function compileSass() {
 function compilePostcss() {
   return gulp
     .src("./src/styles/postcss/from_postcss.css")
-    .pipe(postcss([cssimport, mixins, cssvars, hexrgba, nested, autoprefixer]))
+    .pipe(
+      postcss([
+        cssimport,
+        forLoop,
+        mixins,
+        cssvars,
+        hexrgba,
+        nested,
+        autoprefixer
+      ])
+    )
     .on("error", function(errorinfo) {
       console.log(errorinfo.toString());
       this.emit("end");

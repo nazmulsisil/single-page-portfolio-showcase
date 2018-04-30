@@ -1,0 +1,48 @@
+.spinners {
+  display: flex;
+  position: relative;
+  z-index: 30;
+
+  .spinner1 {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+
+    &::after {
+      box-sizing: content-box;
+      content: "";
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      border-radius: 50%;
+      z-index: -10;
+      border: 0.5rem solid orangered;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: spinning 2s infinite linear;
+    }
+  }
+}
+
+@keyframes spinning {
+  0% {
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+  }
+  50% {
+    height: 110%;
+    width: 110%;
+    transform: translate(-50%, -50%) rotate(30deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(525deg);
+  }
+}

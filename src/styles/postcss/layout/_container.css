@@ -1,0 +1,41 @@
+.container {
+  backface-visibility: hidden;
+  min-height: calc(100vh - ($bodyPadding * 2));
+  margin-left: $bodyPadding;
+  margin-top: 0;
+  margin-right: 0;
+  overflow: hidden;
+  background: radial-gradient(#eef2f3, #8e9eab);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.colored {
+    background: radial-gradient(#6441a5, #2a0845);
+  }
+  transform-origin: center top;
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+  &:not(:last-child) {
+    margin-bottom: $bodyPadding;
+  }
+
+  &:last-child {
+    transform-origin: center bottom;
+  }
+  &--hidden {
+    transform: scaleY(0);
+    &,
+    & * {
+      min-height: 0 !important;
+      height: 0 !important;
+      opacity: 0 !important;
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+      padding-bottom: 0 !important;
+      padding-top: 0 !important;
+      background: radial-gradient(#8e9eab, #8e9eab);
+    }
+  }
+}

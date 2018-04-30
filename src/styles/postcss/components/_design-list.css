@@ -1,0 +1,7 @@
+.design-list {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  width: $left-side-width;
+  display: flex;
+  flex-shrink: 0;
+}

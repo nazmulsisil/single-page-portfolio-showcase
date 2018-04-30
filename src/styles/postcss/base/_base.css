@@ -1,18 +1,15 @@
-$myVar: #294926;
-
-@define-mixin callMe {
-  position: relative;
-  top: 0;
-  left: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-.footer {
-  display: grid;
+html {
+  font-size: 62.5%;
+}
 
-  a {
-    color: rgba($myVar, 0.8);
-    @mixin callMe;
-    display: flex;
-    backface-visibility: hidden;
-  }
+body {
+  color: $font-light;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
