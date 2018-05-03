@@ -30,7 +30,8 @@ function tennisCanvas() {
   let rightPaddleBottom = rightPaddleY + paddleHeight;
 
   let ballPosX = w * 0.5;
-  let ballPosY = h * 0.5;
+  // let ballPosY = h * 0.5;
+  let ballPosY = -15;
   let ballMoveX = 10;
   let ballMoveY = 10;
 
@@ -75,8 +76,18 @@ function tennisCanvas() {
     leftPaddleY = mousePosY - (paddleHeight * 0.5);
 
     // right paddle pos
-    const yGapOfRightPaddle = (rightPaddleY + (paddleHeight * 0.5)) - ballPosY;
-    rightPaddleY -= yGapOfRightPaddle + (paddleHeight * 0.2);
+    // const yGapOfRightPaddle = (rightPaddleY + (paddleHeight * 0.5)) - ballPosY;
+    // rightPaddleY -= yGapOfRightPaddle + (paddleHeight * 0);
+
+
+    if (rightPaddleY + 50 > ballPosY) {
+      rightPaddleY -= 6;
+    }
+
+    if (rightPaddleY + 50 < ballPosY) {
+      rightPaddleY += 6;
+    }
+
 
     // ball pos
     ballPosX += ballMoveX;
@@ -101,8 +112,8 @@ function tennisCanvas() {
         ballMissed('bot');
       }
     }
-    if (ballPosY < 0) ballMoveY *= -1; // bounce in y direction
-    if (ballPosY > h) ballMoveY *= -1; // bounce in y direction
+    if (ballPosY < 0 && ballMoveY < 0.0) ballMoveY *= -1; // bounce in y direction
+    if (ballPosY > h && ballMoveY > 0.0) ballMoveY *= -1; // bounce in y direction
   }
 
   function mousePos(e) {
@@ -171,9 +182,8 @@ function paranoidCanvas() {
   const rowHeight = 22;
   const tileHeight = rowHeight - 2;
 
-
   const paddleWidth = 100;
-  const paddleHeight = 12;
+  const paddleHeight = 13;
   const paddleBottomOffset = 50;
 
   let paddleTop = null;
@@ -181,20 +191,25 @@ function paranoidCanvas() {
   let paddleBottom = null;
   let paddleLeft = null;
 
-  let ballPosX = w * 0.5;
+  let ballPosX = 712; // w * 0.5;
   let ballPosY = h * 0.5;
+
   let ballMoveX = 10;
-  let ballMoveY = 10;
+  let ballMoveY = -10;
   let prevBallPosX = null;
   let prevBallPosY = null;
 
   const numOfCols = Math.ceil(w / colWidth);
-  const numOfRows = 8;
+  const numOfRows = 10;
   const numOfTiles = numOfCols * numOfRows;
-  const tileNotHit = [];
+  let tileNotHit = [];
+
+  let ballMissed = 0;
+  let gameIsOver = false;
+  let scoreCardOn = true;
 
   events();
-  reset();
+  resetTiles();
   setInterval(repeatCall, 1000 / fps);
 
   function repeatCall() {
@@ -204,33 +219,47 @@ function paranoidCanvas() {
 
   function events() {
     canvas.addEventListener('mousemove', mousePos);
-    // canvas.addEventListener('click', restart);
+    canvas.addEventListener('click', restart);
   }
 
   function draw() {
     rect(context, 0, 0, w, h, 'black'); // draw canvas
-    rect(context, paddleLeft, paddleTop,
-      paddleWidth, paddleHeight, 'white'); // draw paddle
+    if (!gameIsOver) {
+      rect(context, paddleLeft, paddleTop,
+        paddleWidth, paddleHeight, 'white'); // draw paddle
 
-    for (let rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
-      for (let colIndex = 0; colIndex < numOfCols; colIndex++) {
-        const tileToBeDrawn = (rowIndex * numOfCols) + colIndex;
-
-        if (tileNotHit[tileToBeDrawn]) {
+      // draw tiles
+      for (let rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
+        for (let colIndex = 0; colIndex < numOfCols; colIndex++) {
+          const tileToBeDrawn = (rowIndex * numOfCols) + colIndex;
           const cellX = colIndex * colWidth;
           const cellY = rowIndex * rowHeight;
-          rect(context, cellX, cellY, tileWidth, tileHeight, 'green');
+
+          if (tileNotHit[tileToBeDrawn]) {
+            rect(context, cellX, cellY, tileWidth, tileHeight, 'green');
+          }
+
+          text(context, tileToBeDrawn,
+            cellX + 30, cellY + 15, 'rgba(255,255,255,0.2)'); // show tile numbers
         }
       }
-    } // draw tiles
 
-    arc(context, ballPosX, ballPosY, 10, 'yellow'); // draw ball
+      // draw ball
+      arc(context, ballPosX, ballPosY, 10, 'yellow');
 
-    text(
-      context,
-      `${sayTileNumber(mousePosX, mousePosY).col} : ${sayTileNumber(mousePosX, mousePosY).row}`,
-      mousePosX, mousePosY, 'pink'
-    );
+      // draw mouse coordinates
+      const tileNowIn = tile(mousePosX, mousePosY);
+      text(
+        context,
+        `${tileNowIn.col} : ${tileNowIn.row}, ${tileNowIn.num}`,
+        mousePosX, mousePosY, 'pink'
+      );
+
+      // draw scores
+      text(context, `Ball missed: ${ballMissed}`, 20, h - 25);
+    } else {
+      text(context, 'Click to continue', 100, 80, 'white');
+    }
   }
 
   function mousePos(e) {
@@ -239,51 +268,108 @@ function paranoidCanvas() {
 
     mousePosX = e.clientX - rectangle.left - root.scrollTop;
     mousePosY = e.clientY - rectangle.top - root.scrollTop;
+
+    // ballPosX = mousePosX;
+    // ballPosY = mousePosY;
   }
 
   function move() {
-    // paddle pos
-    paddlePos();
+    if (!gameIsOver) {
+      // paddle pos
+      paddlePos();
 
-    // ball pos
-    ballPosX += ballMoveX;
-    ballPosY += ballMoveY;
+      // ball pos
+      ballPosX += ballMoveX;
+      ballPosY += ballMoveY;
 
-    // ball reflect from paddle hit
-    if (
-      ballPosX > paddleLeft &&
-      ballPosX < paddleRight &&
-      ballPosY > paddleTop &&
-      ballPosY < paddleBottom
-    ) {
-      const delta = (paddleLeft + (paddleWidth * 0.5)) - ballPosX;
-      ballMoveY *= -1;
-      ballMoveX = -delta * 0.3;
-    }
-
-    if (ballPosX < 0) ballMoveX *= -1; // bounce in x direction
-    if (ballPosX > w) ballMoveX *= -1; // bounce in x direction
-    if (ballPosY < 0) ballMoveY *= -1; // bounce in y direction
-    if (ballPosY > h) ballMoveY *= -1; // bounce in y direction
-
-    // ball reflect form tile hit
-    const ballInTileNumber = sayTileNumber(ballPosX, ballPosY).tileNumber;
-
-    if (tileNotHit[ballInTileNumber]) {
-      tileNotHit[ballInTileNumber] = false;
-
-      const ballFromRowNumber = sayTileNumber(prevBallPosX, prevBallPosY).row;
-      const ballInRowNumber = sayTileNumber(ballPosX, ballPosY).row;
-
-      if (ballFromRowNumber > ballInRowNumber) {
+      // ball reflect from paddle hit
+      if (
+        ballPosX > paddleLeft &&
+        ballPosX < paddleRight &&
+        ballPosY > paddleTop &&
+        ballPosY < paddleBottom
+      ) {
+        const delta = (paddleLeft + (paddleWidth * 0.5)) - ballPosX;
         ballMoveY *= -1;
+        ballMoveX = -delta * 0.3;
       }
-    }
 
-    // end code, so that when this function will be called again, 
-    // this data will remain as previous value as history.
-    prevBallPosX = ballPosX;
-    prevBallPosY = ballPosY;
+      // bounce in x direction
+      if (ballPosX < 0 - Math.abs(ballMoveX * 1.2) && ballMoveX < 0.0) ballMoveX *= -1;
+      // bounce in x direction
+      if (ballPosX > w - Math.abs(ballMoveX * 1.2) && ballMoveX > 0.0) ballMoveX *= -1;
+      // bounce in y direction
+      if (ballPosY < 0 - Math.abs(ballMoveY * 1.2) && ballMoveY < 0.0) ballMoveY *= -1;
+      // bounce in y direction
+      if (ballPosY > h) ballMoveY *= -1;
+
+      // bounce in y direction
+      if (ballPosY > paddleBottom && scoreCardOn) {
+        ballMissed++;
+
+        gameIsOver = (ballMissed >= 3);
+        scoreCardOn = false;
+      }
+      if (ballPosY > h && !gameIsOver) {
+        ballReset();
+      }
+
+      // ball reflect form tile hit
+      const curTile = tile(ballPosX, ballPosY);
+      const curTileNum = curTile.num;
+      const curRow = curTile.row;
+      const curCol = curTile.col;
+
+      if (tileNotHit[curTileNum] && curCol >= 0 && curCol <= numOfCols - 1 && curRow >= 0) {
+        tileNotHit[curTileNum] = false;
+
+        const prevTile = tile(prevBallPosX, prevBallPosY);
+        const prevTileNum = prevTile.num;
+        const prevRow = prevTile.row;
+        const prevCol = prevTile.col;
+
+        const onlyColChanged = (prevRow === curRow && prevCol !== curCol);
+        const onlyRowChanged = (prevRow !== curRow && prevCol === curCol);
+        const bothChanged = (prevRow !== curRow && prevCol !== curCol);
+
+        if (onlyColChanged) {
+          reverse('x');
+        } else if (onlyRowChanged) {
+          reverse('y');
+        } else if (bothChanged) {
+          if (!tileNotHit[(prevBallPosY > ballPosY) ?
+              prevTileNum - numOfCols : prevTileNum + numOfCols]) {
+            reverse('x');
+          }
+          if (!tileNotHit[(prevBallPosX > ballPosX) ? prevTileNum - 1 : prevTileNum + 1]) {
+            reverse('y');
+          }
+          if (
+            tileNotHit[(prevBallPosY > ballPosY) ?
+              prevTileNum - numOfCols : prevTileNum + numOfCols] &&
+            tileNotHit[(prevBallPosX > ballPosX) ? prevTileNum - 1 : prevTileNum + 1]
+          ) {
+            reverse('x');
+            reverse('y');
+          }
+        }
+      }
+      // end code, so that when this function will be called again, 
+      // this data will remain as previous value as history.
+      prevBallPosX = ballPosX;
+      prevBallPosY = ballPosY;
+    }
+  }
+
+  function reverse(direction) {
+    if (direction === 'x') {
+      ballMoveX *= -1;
+    } else if (direction === 'y') {
+      ballMoveY *= -1;
+    } else if (direction === 'both') {
+      ballMoveX *= -1;
+      ballMoveY *= -1;
+    }
   }
 
   function paddlePos() {
@@ -293,21 +379,61 @@ function paranoidCanvas() {
     paddleRight = paddleLeft + paddleWidth;
   }
 
-  function sayTileNumber(x, y) {
-    const withinCol = Math.floor(x / colWidth);
-    const withinRow = Math.floor(y / rowHeight);
-    const tileNumber = (withinRow * numOfCols) + withinCol;
+  function tile(x, y, col, row) {
+    let tileCol;
+    let tileRow;
+
+    if (x && y) {
+      tileCol = Math.floor(x / colWidth);
+      tileRow = Math.floor(y / rowHeight);
+    } else {
+      tileCol = col;
+      tileRow = row;
+    }
+    const num = (tileRow * numOfCols) + tileCol;
 
     return {
-      row: withinCol,
-      col: withinRow,
-      tileNumber
+      col: tileCol,
+      row: tileRow,
+      num
     };
   }
 
-  function reset() {
+  function ballReset() {
+    ballPosY = h * 0.5;
+    scoreCardOn = true;
+  }
+
+  function resetTiles() {
     for (let i = 0; i < numOfTiles; i++) {
       tileNotHit.push(true);
+    }
+  }
+
+  function restart() {
+    if (gameIsOver) {
+      mousePosX = w * 0.5;
+      mousePosY = h * 0.5;
+
+      paddleTop = null;
+      paddleRight = null;
+      paddleBottom = null;
+      paddleLeft = null;
+
+      ballPosX = w * 0.5;
+      ballPosY = h * 0.5;
+      ballMoveX = 10;
+      ballMoveY = 10;
+      prevBallPosX = null;
+      prevBallPosY = null;
+
+      tileNotHit = [];
+
+      ballMissed = 0;
+      gameIsOver = false;
+      scoreCardOn = true;
+
+      resetTiles();
     }
   }
 }
