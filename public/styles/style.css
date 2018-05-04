@@ -450,7 +450,7 @@ body {
 .design-list {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-  width: 25rem;
+  width: 35rem;
   display: flex;
   flex-shrink: 0;
 }
@@ -465,7 +465,7 @@ body {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  width: 25rem;
+  width: 35rem;
   background: #b9c7d3;
   min-height: calc(100vh - (1rem * 2));
 }

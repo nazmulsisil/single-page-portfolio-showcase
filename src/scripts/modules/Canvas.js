@@ -76,16 +76,15 @@ function tennisCanvas() {
     leftPaddleY = mousePosY - (paddleHeight * 0.5);
 
     // right paddle pos
-    // const yGapOfRightPaddle = (rightPaddleY + (paddleHeight * 0.5)) - ballPosY;
-    // rightPaddleY -= yGapOfRightPaddle + (paddleHeight * 0);
+    const yGapOfRightPaddle = Math.abs((rightPaddleY + (paddleHeight * 0.5)) - ballPosY);
 
 
-    if (rightPaddleY + 50 > ballPosY) {
-      rightPaddleY -= 6;
+    if (rightPaddleY + 50 > ballPosY && yGapOfRightPaddle > paddleHeight * 0.2) {
+      rightPaddleY -= 8;
     }
 
-    if (rightPaddleY + 50 < ballPosY) {
-      rightPaddleY += 6;
+    if (rightPaddleY + 50 < ballPosY && yGapOfRightPaddle > paddleHeight * 0.2) {
+      rightPaddleY += 8;
     }
 
 
@@ -191,7 +190,7 @@ function paranoidCanvas() {
   let paddleBottom = null;
   let paddleLeft = null;
 
-  let ballPosX = 712; // w * 0.5;
+  let ballPosX = w * 0.5;
   let ballPosY = h * 0.5;
 
   let ballMoveX = 10;
@@ -201,6 +200,7 @@ function paranoidCanvas() {
 
   const numOfCols = Math.ceil(w / colWidth);
   const numOfRows = 10;
+  const rowsTopOffset = 3;
   const numOfTiles = numOfCols * numOfRows;
   let tileNotHit = [];
 
@@ -239,8 +239,9 @@ function paranoidCanvas() {
             rect(context, cellX, cellY, tileWidth, tileHeight, 'green');
           }
 
-          text(context, tileToBeDrawn,
-            cellX + 30, cellY + 15, 'rgba(255,255,255,0.2)'); // show tile numbers
+          // show tile numbers
+          // text(context, tileToBeDrawn,
+          //   cellX + 30, cellY + 15, 'rgba(255,255,255,0.2)');
         }
       }
 
@@ -258,7 +259,11 @@ function paranoidCanvas() {
       // draw scores
       text(context, `Ball missed: ${ballMissed}`, 20, h - 25);
     } else {
-      text(context, 'Click to continue', 100, 80, 'white');
+      if (!tileRemaining()) {
+        text(context, 'You won. Click to continue!', 100, 80, 'white');
+        return;
+      }
+      text(context, 'You lost. Click to continue!', 100, 80, 'white');
     }
   }
 
@@ -295,11 +300,11 @@ function paranoidCanvas() {
       }
 
       // bounce in x direction
-      if (ballPosX < 0 - Math.abs(ballMoveX * 1.2) && ballMoveX < 0.0) ballMoveX *= -1;
+      if (ballPosX < 0 + Math.abs(ballMoveX * 1.2) && ballMoveX < 0.0) ballMoveX *= -1;
       // bounce in x direction
       if (ballPosX > w - Math.abs(ballMoveX * 1.2) && ballMoveX > 0.0) ballMoveX *= -1;
       // bounce in y direction
-      if (ballPosY < 0 - Math.abs(ballMoveY * 1.2) && ballMoveY < 0.0) ballMoveY *= -1;
+      if (ballPosY < 0 + Math.abs(ballMoveY * 1.2) && ballMoveY < 0.0) ballMoveY *= -1;
       // bounce in y direction
       if (ballPosY > h) ballMoveY *= -1;
 
@@ -322,6 +327,10 @@ function paranoidCanvas() {
 
       if (tileNotHit[curTileNum] && curCol >= 0 && curCol <= numOfCols - 1 && curRow >= 0) {
         tileNotHit[curTileNum] = false;
+
+        if (!tileRemaining()) {
+          gameIsOver = true;
+        }
 
         const prevTile = tile(prevBallPosX, prevBallPosY);
         const prevTileNum = prevTile.num;
@@ -406,8 +415,16 @@ function paranoidCanvas() {
 
   function resetTiles() {
     for (let i = 0; i < numOfTiles; i++) {
-      tileNotHit.push(true);
+      if (i < rowsTopOffset * numOfCols) {
+        tileNotHit.push(false);
+      } else {
+        tileNotHit.push(true);
+      }
     }
+  }
+
+  function tileRemaining() {
+    return tileNotHit.some(el => el === true);
   }
 
   function restart() {
