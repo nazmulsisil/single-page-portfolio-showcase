@@ -17,3 +17,12 @@ export const text = (ctx, txt, x, y, color) => {
   context.fillStyle = color;
   context.fillText(txt, x, y);
 };
+
+export const drawBitmapCenteredWithRotation = (ctx, img, x, y, withAngle) => {
+  const context = ctx;
+  context.save();
+  context.translate(x, y);
+  context.rotate(withAngle);
+  context.drawImage(img, -(img.width * 0.5), -(img.height * 0.5));
+  context.restore();
+};

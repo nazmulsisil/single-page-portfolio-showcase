@@ -6,7 +6,7 @@ import List from "./modules/List";
 import Reaction from "./modules/Reaction";
 import {
   initCanvas
-} from './modules/Canvas'
+} from './modules/canvas/Canvas'
 
 const clickFn = new ClickFn(
   $("#append-div"),
