@@ -12,10 +12,14 @@ export const arc = (ctx, x, y, r, c) => {
   context.fill();
 };
 
-export const text = (ctx, txt, x, y, color) => {
+export const text = (ctx, txt, x, y, color, fontSize = '16pt', align = 'left', weight = 'normal') => {
   const context = ctx;
+  context.save();
   context.fillStyle = color;
+  context.textAlign = align;
+  context.font = `italic ${weight} ${fontSize} Calibri`;
   context.fillText(txt, x, y);
+  context.restore();
 };
 
 export const drawBitmapCenteredWithRotation = (ctx, img, x, y, withAngle) => {

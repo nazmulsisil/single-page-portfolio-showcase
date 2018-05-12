@@ -11,8 +11,8 @@ class Reaction {
   }
 
   events() {
-    let self = this;
-    this.target.addEventListener("click", function() {
+    const self = this;
+    this.target.addEventListener("click", function () {
       self.htmlInjection();
       self.appearAgain();
     });
@@ -56,11 +56,11 @@ class Reaction {
   }
 
   color() {
-    let n1 = 255,
-      n2 = this.r(255),
-      n3 = this.r(255),
+    let n1 = this.r(230),
+      n2 = this.r(230),
+      n3 = this.r(230),
       colArr = [n1, n2, n3];
-    colArr = colArr.sort(function() {
+    colArr = colArr.sort(function () {
       return 0.5 - Math.random();
     });
     return "rgb(" + colArr[0] + "," + colArr[1] + "," + colArr[2] + ")";

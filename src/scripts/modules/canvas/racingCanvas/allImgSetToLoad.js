@@ -1,13 +1,10 @@
 import {
-  PicDetails
-} from './PicDetails';
-import {
   findObjFromArray
 } from './helperFunctions';
 
-export const allImgSetToLoad = (whichLayout) => {
+export const allImgSetToLoad = (gameBaseDetails) => {
   const htmlTags = {};
-  const uniquePicCodes = [...new Set(whichLayout)];
+  const uniquePicCodes = [...new Set(gameBaseDetails.layout)];
   const picturesToLoad = uniquePicCodes.length;
 
   const picCodeDetails = [];
@@ -18,6 +15,7 @@ export const allImgSetToLoad = (whichLayout) => {
   picCodeDetails.push(new PicDetails('goal', 3, '../img/goal.png'));
   picCodeDetails.push(new PicDetails('tree', 4, '../img/tree.png'));
   picCodeDetails.push(new PicDetails('flag', 5, '../img/flag.png'));
+  picCodeDetails.push(new PicDetails('flag', 7, '../img/blocker.png'));
   // immediately end the function if all code not found in picture set picCodeDetails array
   if (!allCodesFoundInPicCodeDetailsArray()) {
     console.log('PicCodes used in the layout was not found in picCodeDetails array');
@@ -40,6 +38,13 @@ export const allImgSetToLoad = (whichLayout) => {
       if (!codeFound) allCodesFound = false;
     });
     return allCodesFound;
+  }
+
+  // Constructor for generating details of a pic item
+  function PicDetails(type, layoutCode, filePath) {
+    this.type = type;
+    this.layoutCode = layoutCode;
+    this.filePath = filePath;
   }
 
   return {

@@ -11,7 +11,7 @@ function tennisCanvas() {
   const h = canvas.height;
 
   const fps = 30;
-  let gameIsOver = false;
+  let gameIsOver = true;
 
   let mousePosY = h * 0.5;
 
@@ -58,62 +58,65 @@ function tennisCanvas() {
         rect(context, (w * 0.5) - 1, i, 2, 25, 'rgba(0,255,0,0.2)');
       } // divider net
       text(context, `You missed: ${humanScore}`, 100, 100, 'white');
-      text(context, `Bot missed: ${botScore}`, w - 150, 100, 'white');
+      text(context, `Bot missed: ${botScore}`, w - 210, 100, 'white');
       arc(context, ballPosX, ballPosY, 10, 'yellow');
     } else {
-      text(context, `${leadPlayer} won`, 100, 100, 'white');
-      text(context, 'Click to continue', w - 150, 100, 'white');
+      if (leadPlayer) {
+        text(context, `${leadPlayer} won`, 100, 100, 'white');
+      }
+      text(context, 'Click to continue', w - 240, 100, 'white');
     }
   }
 
   function move() {
-    // left paddle pos
-    leftPaddleY = mousePosY - (paddleHeight * 0.5);
+    if (!gameIsOver) {
+      // left paddle pos
+      leftPaddleY = mousePosY - (paddleHeight * 0.5);
 
-    // right paddle pos
-    const yGapOfRightPaddle = Math.abs((rightPaddleY + (paddleHeight * 0.5)) - ballPosY);
+      // right paddle pos
+      const yGapOfRightPaddle = Math.abs((rightPaddleY + (paddleHeight * 0.5)) - ballPosY);
 
-
-    if (rightPaddleY + 50 > ballPosY && yGapOfRightPaddle > paddleHeight * 0.2) {
-      rightPaddleY -= 8;
-    }
-
-    if (rightPaddleY + 50 < ballPosY && yGapOfRightPaddle > paddleHeight * 0.2) {
-      rightPaddleY += 8;
-    }
-
-
-    // ball pos
-    ballPosX += ballMoveX;
-    ballPosY += ballMoveY;
-    // test if left paddle hit and then bounce otherwise resetBall()
-    if (ballPosX < 0) {
-      const deltaLeft = Math.abs((leftPaddleY + (paddleHeight * 0.5)) - ballPosY);
-      if (betweenLeftPaddleVertically()) {
-        ballMoveX *= -1;
-        ballMoveY = deltaLeft * 0.3;
-      } else {
-        ballMissed('human');
+      if (rightPaddleY + 50 > ballPosY && yGapOfRightPaddle > paddleHeight * 0.2) {
+        rightPaddleY -= 8;
       }
-    }
-    // test if right paddle hit and then bounce otherwise resetBall()
-    if (ballPosX > w) {
-      const deltaRight = Math.abs((rightPaddleY + (paddleHeight * 0.5)) - ballPosY);
-      if (betweenRightPaddleVertically()) {
-        ballMoveX *= -1;
-        ballMoveY = deltaRight * 0.3;
-      } else {
-        ballMissed('bot');
+
+      if (rightPaddleY + 50 < ballPosY && yGapOfRightPaddle > paddleHeight * 0.2) {
+        rightPaddleY += 8;
       }
+
+
+      // ball pos
+      ballPosX += ballMoveX;
+      ballPosY += ballMoveY;
+      // test if left paddle hit and then bounce otherwise resetBall()
+      if (ballPosX < 0) {
+        const deltaLeft = Math.abs((leftPaddleY + (paddleHeight * 0.5)) - ballPosY);
+        if (betweenLeftPaddleVertically()) {
+          ballMoveX *= -1;
+          ballMoveY = deltaLeft * 0.3;
+        } else {
+          ballMissed('human');
+        }
+      }
+      // test if right paddle hit and then bounce otherwise resetBall()
+      if (ballPosX > w) {
+        const deltaRight = Math.abs((rightPaddleY + (paddleHeight * 0.5)) - ballPosY);
+        if (betweenRightPaddleVertically()) {
+          ballMoveX *= -1;
+          ballMoveY = deltaRight * 0.3;
+        } else {
+          ballMissed('bot');
+        }
+      }
+      if (ballPosY < 0 && ballMoveY < 0.0) ballMoveY *= -1; // bounce in y direction
+      if (ballPosY > h && ballMoveY > 0.0) ballMoveY *= -1; // bounce in y direction
     }
-    if (ballPosY < 0 && ballMoveY < 0.0) ballMoveY *= -1; // bounce in y direction
-    if (ballPosY > h && ballMoveY > 0.0) ballMoveY *= -1; // bounce in y direction
   }
 
   function mousePos(e) {
     const rectangle = canvas.getBoundingClientRect();
     const root = document.documentElement;
-    mousePosY = e.clientY - rectangle.top - root.scrollTop;
+    mousePosY = e.clientY - rectangle.top; // - root.scrollTop;
   }
 
   function betweenLeftPaddleVertically() {

@@ -8,3 +8,22 @@ export const findObjFromArray = (whichArray, whichProp, whichValue) => {
   });
   return tempoArray[0]; // returning first one, if in case multiple items found
 };
+
+
+export const tile = (x, y, colWidth, rowHeight, numOfCols) => {
+  let tileCol;
+  let tileRow;
+
+  if (x && y) {
+    tileCol = Math.floor(x / colWidth);
+    tileRow = Math.floor(y / rowHeight);
+  }
+
+  const num = (tileRow * numOfCols) + tileCol;
+
+  return {
+    col: tileCol,
+    row: tileRow,
+    num
+  };
+};

@@ -5,12 +5,12 @@ import {
   allImgSetToLoad
 } from './allImgSetToLoad';
 import {
-  events
-} from './events';
-import {
   rect,
   text
 } from '../Drawings';
+import {
+  events
+} from './events';
 import {
   drawEverything
 } from './drawEverything';
@@ -21,7 +21,8 @@ import {
   moveEverything
 } from './moveEverything';
 
-function racingCanvas() {
+
+function racingCanvas(whichLevel = 'level1') {
   const canvas = document.getElementById('racing-canvas');
   const context = canvas.getContext('2d');
   const w = canvas.width;
@@ -32,20 +33,57 @@ function racingCanvas() {
   const numOfCols = Math.ceil(w / colWidth);
   const numOfRows = Math.ceil(h / rowHeight);
 
-  const chosenLayout = getLayout('level1');
+  const gameBaseDetails = new(function () {
+    this.layoutName = whichLevel;
+    this.layout = getLayout(whichLevel);
+    this.startTime = null;
+    this.delayStartTime = 2.5;
+    this.winningTime = '0:00';
+    this.lapTime = (decimal) => {
+      if (winnerIs()) {
+        console.log('fuck off');
+        return;
+      }
+      return (((new Date() - this.startTime) / 1000) - this.delayStartTime).toFixed(decimal);
+    };
+    this.timerCountDownTime = () => ((new Date() - this.startTime) / 1000).toFixed();
+    this.endTime = null;
+    this.countdownTime = () => {
+      if (this.timerCountDownTime() > this.delayStartTime) {
+        this.layout.forEach((picCode, i) => {
+          if (picCode === 7) {
+            this.layout[i] = 0;
+          }
+        });
+        return 'Go...';
+      }
+      if (this.timerCountDownTime() > this.delayStartTime * 0.80) return 'Go';
+      if (this.timerCountDownTime() > this.delayStartTime * 0.60) return '0';
+      if (this.timerCountDownTime() > this.delayStartTime * 0.40) return '1';
+      if (this.timerCountDownTime() > this.delayStartTime * 0.20) return '2';
 
-  const imgTags = allImgSetToLoad(chosenLayout);
+      return '3';
+    };
+  })();
+
+  const imgTags = allImgSetToLoad(gameBaseDetails);
   const htmlTags = imgTags.htmlTags;
   const uniquePicCodes = imgTags.uniquePicCodes;
   let picturesToLoad = imgTags.picturesToLoad;
 
-
-  const blueCar = new CarClass(chosenLayout);
-  const greenCar = new CarClass(chosenLayout);
+  const blueCar = new CarClass('Blue Baron', gameBaseDetails);
+  const greenCar = new CarClass('Green Comet', gameBaseDetails);
 
   // Loading screen
   rect(context, 0, 0, w, h, 'green');
   text(context, 'Loading...', (w * 0.5) - 50, h * 0.5, 'white');
+
+  const argsArray = [
+    context, gameBaseDetails, htmlTags,
+    numOfRows, numOfCols,
+    colWidth, rowHeight,
+    blueCar, greenCar
+  ];
 
   // waiting to load all the images, after loading done, run other codings.
   uniquePicCodes.forEach(picCode => {
@@ -57,22 +95,23 @@ function racingCanvas() {
     });
   });
 
-
   function allImgLoadedSoRunOtherCodings() {
-    blueCar.resetCar(colWidth, rowHeight, numOfRows, numOfCols, 2);
-    greenCar.resetCar(colWidth, rowHeight, numOfRows, numOfCols, 6);
+    blueCar.setCar(colWidth, rowHeight, numOfRows, numOfCols, 2);
+    greenCar.setCar(colWidth, rowHeight, numOfRows, numOfCols, 6);
+
+    events.apply(this, argsArray);
     setInterval(repeatCall, 1000 / fps);
   }
 
   function repeatCall() {
-    moveEverything(blueCar);
-    drawEverything(
-      context, chosenLayout, htmlTags,
-      numOfRows, numOfCols,
-      colWidth, rowHeight,
-      blueCar.x, blueCar.y, blueCar.angle,
-      greenCar.x, greenCar.y, greenCar.angle
-    );
+    moveEverything.apply(this, argsArray);
+    drawEverything.apply(this, argsArray);
+  }
+
+  function winnerIs() {
+    if (blueCar.won) return blueCar.name;
+    if (greenCar.won) return greenCar.name;
+    return false;
   }
 }
 

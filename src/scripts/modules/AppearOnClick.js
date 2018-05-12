@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $ from 'jquery';
 
 class ClickFn {
   constructor(itemToClick, elementsParent, elementToAppend) {
@@ -9,8 +9,8 @@ class ClickFn {
   }
 
   events() {
-    var that = this;
-    this.itemToClick.on("click", that.appendDiv.bind(this));
+    const that = this;
+    this.itemToClick.on('click', that.appendDiv.bind(this));
   }
 
   appendDiv() {

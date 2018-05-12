@@ -44,8 +44,9 @@ function paranoidCanvas() {
   let tileNotHit = [];
 
   let ballMissed = 0;
-  let gameIsOver = false;
+  let gameIsOver = true;
   let scoreCardOn = true;
+  let firstTimePlay = true;
 
   events();
   resetTiles();
@@ -88,21 +89,25 @@ function paranoidCanvas() {
       arc(context, ballPosX, ballPosY, 10, 'yellow');
 
       // draw mouse coordinates
-      const tileNowIn = tile(mousePosX, mousePosY);
-      text(
-        context,
-        `${tileNowIn.col} : ${tileNowIn.row}, ${tileNowIn.num}`,
-        mousePosX, mousePosY, 'pink'
-      );
+      // const tileNowIn = tile(mousePosX, mousePosY);
+      // text(
+      //   context,
+      //   `${tileNowIn.col} : ${tileNowIn.row}, ${tileNowIn.num}`,
+      //   mousePosX, mousePosY, 'pink'
+      // );
 
       // draw scores
-      text(context, `Ball missed: ${ballMissed}`, 20, h - 25);
+      text(context, `Ball missed: ${ballMissed}`, 20, h - 20);
     } else {
       if (!tileRemaining()) {
         text(context, 'You won. Click to continue!', 100, 80, 'white');
         return;
       }
-      text(context, 'You lost. Click to continue!', 100, 80, 'white');
+      if (firstTimePlay) {
+        text(context, 'Click to continue!', 100, 80, 'white');
+      } else {
+        text(context, 'You lost. Click to continue!', 100, 80, 'white');
+      }
     }
   }
 
@@ -110,9 +115,10 @@ function paranoidCanvas() {
     const rectangle = canvas.getBoundingClientRect();
     const root = document.documentElement;
 
-    mousePosX = e.clientX - rectangle.left - root.scrollTop;
+    mousePosX = e.clientX - rectangle.left;
     mousePosY = e.clientY - rectangle.top - root.scrollTop;
 
+    // Attach ball to the mouse for game development
     // ballPosX = mousePosX;
     // ballPosY = mousePosY;
   }
@@ -288,6 +294,7 @@ function paranoidCanvas() {
       ballMissed = 0;
       gameIsOver = false;
       scoreCardOn = true;
+      firstTimePlay = false;
 
       resetTiles();
     }
