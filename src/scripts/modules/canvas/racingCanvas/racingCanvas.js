@@ -20,6 +20,9 @@ import {
 import {
   moveEverything
 } from './moveEverything';
+import {
+  winnerIs
+} from './helperFunctions';
 
 
 function racingCanvas(whichLevel = 'level1') {
@@ -37,32 +40,28 @@ function racingCanvas(whichLevel = 'level1') {
     this.layoutName = whichLevel;
     this.layout = getLayout(whichLevel);
     this.startTime = null;
-    this.delayStartTime = 2.5;
+    this.delayStartTime = 3;
     this.winningTime = '0:00';
     this.lapTime = (decimal) => {
-      if (winnerIs()) {
-        console.log('fuck off');
-        return;
-      }
+      if (winnerIs(blueCar, greenCar)) return;
       return (((new Date() - this.startTime) / 1000) - this.delayStartTime).toFixed(decimal);
     };
-    this.timerCountDownTime = () => ((new Date() - this.startTime) / 1000).toFixed();
+    this.timerCountDownTime = () => ((new Date() - this.startTime) / 1000).toFixed(2);
     this.endTime = null;
+    // countdown completed so open the car blocker bar
     this.countdownTime = () => {
+      const layout = this.layout;
+      const timer = this.timerCountDownTime();
+      const delay = this.delayStartTime;
       if (this.timerCountDownTime() > this.delayStartTime) {
-        this.layout.forEach((picCode, i) => {
-          if (picCode === 7) {
-            this.layout[i] = 0;
-          }
-        });
+        while (layout.indexOf(7) !== -1) layout.splice(layout.indexOf(7), 1, 0);
         return 'Go...';
       }
-      if (this.timerCountDownTime() > this.delayStartTime * 0.80) return 'Go';
-      if (this.timerCountDownTime() > this.delayStartTime * 0.60) return '0';
-      if (this.timerCountDownTime() > this.delayStartTime * 0.40) return '1';
-      if (this.timerCountDownTime() > this.delayStartTime * 0.20) return '2';
-
-      return '3';
+      if (timer > (delay * 0.80)) return 'Go';
+      if (timer > (delay * 0.60)) return '0';
+      if (timer > (delay * 0.40)) return '1';
+      if (timer > (delay * 0.20)) return '2';
+      return 3;
     };
   })();
 
@@ -70,12 +69,11 @@ function racingCanvas(whichLevel = 'level1') {
   const htmlTags = imgTags.htmlTags;
   const uniquePicCodes = imgTags.uniquePicCodes;
   let picturesToLoad = imgTags.picturesToLoad;
-
   const blueCar = new CarClass('Blue Baron', gameBaseDetails);
   const greenCar = new CarClass('Green Comet', gameBaseDetails);
 
   // Loading screen
-  rect(context, 0, 0, w, h, 'green');
+  rect(context, 0, 0, w, h, 'black');
   text(context, 'Loading...', (w * 0.5) - 50, h * 0.5, 'white');
 
   const argsArray = [
@@ -89,9 +87,7 @@ function racingCanvas(whichLevel = 'level1') {
   uniquePicCodes.forEach(picCode => {
     htmlTags[picCode].addEventListener('load', () => {
       picturesToLoad--;
-      if (picturesToLoad === 0) {
-        allImgLoadedSoRunOtherCodings();
-      }
+      if (picturesToLoad === 0) allImgLoadedSoRunOtherCodings();
     });
   });
 
@@ -106,12 +102,6 @@ function racingCanvas(whichLevel = 'level1') {
   function repeatCall() {
     moveEverything.apply(this, argsArray);
     drawEverything.apply(this, argsArray);
-  }
-
-  function winnerIs() {
-    if (blueCar.won) return blueCar.name;
-    if (greenCar.won) return greenCar.name;
-    return false;
   }
 }
 

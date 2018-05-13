@@ -3,6 +3,10 @@ import {
   text,
   rect
 } from '../Drawings';
+import {
+  winnerIs
+} from './helperFunctions';
+
 
 export const drawEverything = (
   context, gameBaseDetails, htmlTags,
@@ -62,28 +66,24 @@ export const drawEverything = (
   text(context, 'Level 3', 170, context.canvas.height - 13, 'white');
 
   // If race is over, any of the players has crossed the finish line
-  if (winnerIs()) {
+  if (winnerIs(blueCar, greenCar)) {
     // Finished message
     rect(context, 0, 40, w, 80, 'rgba(0,0,0,0.8)');
-    text(context, `${winnerIs()} won. Click to play again!`, (w * 0.5) - 155, 88, 'white');
+    text(context,
+      `${winnerIs(blueCar, greenCar)} won. Click to play again!`,
+      (w * 0.5) - 155, 88, 'white'
+    );
     // while race is running
   } else if (baseDetails.countdownTime() === 'Go...') {
     baseDetails.winningTime = baseDetails.lapTime(2);
   } else {
     // Display Countdown time  
-    rect(context, 40, 40, w - 80, h - 80, 'rgba(0,0,0,0.8)');
+    rect(context, 40, 40, w - 80, h - 80, 'rgba(0,0,0,0.2)');
     text(context, baseDetails.countdownTime(), w * 0.5, 400, 'white', '250pt', 'center', 'bold');
   }
 
   // Race Timer
   rect(context, w - 80, h - 40, 80, 70, '#FF5500');
   rect(context, w - 80, h - 40, 78, 38, 'rgba(0,0,0,1)');
-  console.log(h, w);
   text(context, baseDetails.winningTime, w - 8, h - 12, '#FF5500', undefined, 'right');
-
-  function winnerIs() {
-    if (blueCar.won) return blueCar.name;
-    if (greenCar.won) return greenCar.name;
-    return false;
-  }
 };

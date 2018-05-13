@@ -27,3 +27,9 @@ export const tile = (x, y, colWidth, rowHeight, numOfCols) => {
     num
   };
 };
+
+export const winnerIs = (blueC, greenC) => {
+  if (blueC.won) return blueC.name;
+  if (greenC.won) return greenC.name;
+  return false;
+};
