@@ -1,12 +1,15 @@
-import {
-  getLayout
-} from './layouts';
+import { getLayout } from './layouts';
 
 export const events = (
-  context, gameBaseDetails, htmlTags,
-  numOfRows, numOfCols,
-  colWidth, rowHeight,
-  blueCar, greenCar
+  context,
+  gameBaseDetails,
+  htmlTags,
+  numOfRows,
+  numOfCols,
+  colWidth,
+  rowHeight,
+  blueCar,
+  greenCar
 ) => {
   const blueCarKeys = [37, 38, 39, 40];
   const greenCarKeys = [65, 68, 87, 83];
@@ -27,25 +30,28 @@ export const events = (
     }
 
     // determine which car to move on which keys
-    const car = (function () {
+    const car = (function() {
       if (blueCarKeys.includes(pressedKey)) return blue;
       if (greenCarKeys.includes(pressedKey)) return green;
-    }());
+    })();
 
     flipGear(car, pressedKey, true);
   }
 
   function keyReleased(evt) {
     const releasedKey = evt.keyCode;
-    if (blueCarKeys.includes(releasedKey) || greenCarKeys.includes(releasedKey)) {
+    if (
+      blueCarKeys.includes(releasedKey) ||
+      greenCarKeys.includes(releasedKey)
+    ) {
       evt.preventDefault();
     }
 
     // determine which car to move on which keys
-    const car = (function () {
+    const car = (function() {
       if (blueCarKeys.includes(releasedKey)) return blue;
       if (greenCarKeys.includes(releasedKey)) return green;
-    }());
+    })();
 
     flipGear(car, releasedKey, false);
   }
@@ -64,6 +70,10 @@ export const events = (
   }
 
   function clicked(e) {
+    if (!baseDetails.gameStarted) {
+      changeLevel(baseDetails.layoutName);
+      baseDetails.gameStarted = true;
+    }
     if (blue.won || green.won) changeLevel(baseDetails.layoutName);
 
     const rectangle = canvas.getBoundingClientRect();

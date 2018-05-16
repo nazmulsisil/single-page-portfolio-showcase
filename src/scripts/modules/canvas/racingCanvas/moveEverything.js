@@ -1,12 +1,15 @@
-import {
-  tile
-} from './helperFunctions';
+import { tile } from './helperFunctions';
 
 export const moveEverything = (
-  context, gameBaseDetails, htmlTags,
-  numOfRows, numOfCols,
-  colWidth, rowHeight,
-  blueCar, greenCar
+  context,
+  gameBaseDetails,
+  htmlTags,
+  numOfRows,
+  numOfCols,
+  colWidth,
+  rowHeight,
+  blueCar,
+  greenCar
 ) => {
   const blue = blueCar;
   const green = greenCar;
@@ -32,13 +35,22 @@ export const moveEverything = (
     const curTileNum = curTile.num;
     const curRow = curTile.row;
     const curCol = curTile.col;
-    if (chosenLayout[curTileNum] && curCol >= 0 && curCol <= numOfCols - 1 && curRow >= 0) {
+    if (
+      chosenLayout[curTileNum] &&
+      curCol >= 0 &&
+      curCol <= numOfCols - 1 &&
+      curRow >= 0
+    ) {
       if (chosenLayout[curTileNum] !== 3) {
         car.x -= Math.cos(car.angle) * car.move;
         car.y -= Math.sin(car.angle) * car.move;
         car.move *= -0.4;
       }
-      if (chosenLayout[curTileNum] === 3 && blue.won === false && green.won === false) {
+      if (
+        chosenLayout[curTileNum] === 3 &&
+        blue.won === false &&
+        green.won === false
+      ) {
         car.won = true;
       }
     }

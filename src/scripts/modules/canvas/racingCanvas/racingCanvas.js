@@ -1,31 +1,14 @@
-import {
-  getLayout
-} from './layouts';
-import {
-  allImgSetToLoad
-} from './allImgSetToLoad';
-import {
-  rect,
-  text
-} from '../Drawings';
-import {
-  events
-} from './events';
-import {
-  drawEverything
-} from './drawEverything';
-import {
-  CarClass
-} from './CarClass';
-import {
-  moveEverything
-} from './moveEverything';
-import {
-  winnerIs
-} from './helperFunctions';
+import { getLayout } from './layouts';
+import { allImgSetToLoad } from './allImgSetToLoad';
+import { rect, text } from '../Drawings';
+import { events } from './events';
+import { drawEverything } from './drawEverything';
+import { CarClass } from './CarClass';
+import { moveEverything } from './moveEverything';
+import { winnerIs } from './helperFunctions';
+import { r } from '../wander/helperFunctions';
 
-
-function racingCanvas(whichLevel = 'level1') {
+function racingCanvas(whichLevel = `level${r(3, 1)}`) {
   const canvas = document.getElementById('racing-canvas');
   const context = canvas.getContext('2d');
   const w = canvas.width;
@@ -36,17 +19,22 @@ function racingCanvas(whichLevel = 'level1') {
   const numOfCols = Math.ceil(w / colWidth);
   const numOfRows = Math.ceil(h / rowHeight);
 
-  const gameBaseDetails = new(function () {
+  const gameBaseDetails = new function() {
     this.layoutName = whichLevel;
     this.layout = getLayout(whichLevel);
     this.startTime = null;
     this.delayStartTime = 3;
     this.winningTime = '0:00';
-    this.lapTime = (decimal) => {
+    this.gameStarted = false;
+    this.lapTime = decimal => {
       if (winnerIs(blueCar, greenCar)) return;
-      return (((new Date() - this.startTime) / 1000) - this.delayStartTime).toFixed(decimal);
+      return (
+        (new Date() - this.startTime) / 1000 -
+        this.delayStartTime
+      ).toFixed(decimal);
     };
-    this.timerCountDownTime = () => ((new Date() - this.startTime) / 1000).toFixed(2);
+    this.timerCountDownTime = () =>
+      ((new Date() - this.startTime) / 1000).toFixed(2);
     this.endTime = null;
     // countdown completed so open the car blocker bar
     this.countdownTime = () => {
@@ -57,13 +45,13 @@ function racingCanvas(whichLevel = 'level1') {
         while (layout.indexOf(7) !== -1) layout.splice(layout.indexOf(7), 1, 0);
         return 'Go...';
       }
-      if (timer > (delay * 0.80)) return 'Go';
-      if (timer > (delay * 0.60)) return '0';
-      if (timer > (delay * 0.40)) return '1';
-      if (timer > (delay * 0.20)) return '2';
+      if (timer > delay * 0.8) return 'Go';
+      if (timer > delay * 0.6) return '0';
+      if (timer > delay * 0.4) return '1';
+      if (timer > delay * 0.2) return '2';
       return 3;
     };
-  })();
+  }();
 
   const imgTags = allImgSetToLoad(gameBaseDetails);
   const htmlTags = imgTags.htmlTags;
@@ -74,13 +62,18 @@ function racingCanvas(whichLevel = 'level1') {
 
   // Loading screen
   rect(context, 0, 0, w, h, 'black');
-  text(context, 'Loading...', (w * 0.5) - 50, h * 0.5, 'white');
+  text(context, 'Loading...', w * 0.5 - 50, h * 0.5, 'white');
 
   const argsArray = [
-    context, gameBaseDetails, htmlTags,
-    numOfRows, numOfCols,
-    colWidth, rowHeight,
-    blueCar, greenCar
+    context,
+    gameBaseDetails,
+    htmlTags,
+    numOfRows,
+    numOfCols,
+    colWidth,
+    rowHeight,
+    blueCar,
+    greenCar
   ];
 
   // waiting to load all the images, after loading done, run other codings.
@@ -100,8 +93,22 @@ function racingCanvas(whichLevel = 'level1') {
   }
 
   function repeatCall() {
-    moveEverything.apply(this, argsArray);
-    drawEverything.apply(this, argsArray);
+    if (gameBaseDetails.gameStarted) {
+      moveEverything.apply(this, argsArray);
+      drawEverything.apply(this, argsArray);
+    } else {
+      // Loading screen
+      rect(context, 0, 0, w, h, 'black');
+      text(
+        context,
+        'Click to start racing...',
+        w * 0.5,
+        h * 0.5,
+        'white',
+        undefined,
+        'center'
+      );
+    }
   }
 }
 

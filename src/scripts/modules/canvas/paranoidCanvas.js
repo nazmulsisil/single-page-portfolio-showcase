@@ -1,48 +1,35 @@
-import {
-  rect,
-  arc,
-  text
-} from './Drawings';
+import { rect, arc, text } from './Drawings';
 
 function paranoidCanvas() {
   const canvas = document.getElementById('paranoid-canvas');
   const context = canvas.getContext('2d');
   const w = canvas.width;
   const h = canvas.height;
-
   let mousePosX = w * 0.5;
   let mousePosY = h * 0.5;
-
   const fps = 30;
-
   const colWidth = 80;
   const tileWidth = colWidth - 2;
   const rowHeight = 22;
   const tileHeight = rowHeight - 2;
-
   const paddleWidth = 100;
   const paddleHeight = 13;
   const paddleBottomOffset = 50;
-
   let paddleTop = null;
   let paddleRight = null;
   let paddleBottom = null;
   let paddleLeft = null;
-
   let ballPosX = w * 0.5;
   let ballPosY = h * 0.5;
-
   let ballMoveX = 10;
   let ballMoveY = -10;
   let prevBallPosX = null;
   let prevBallPosY = null;
-
   const numOfCols = Math.ceil(w / colWidth);
   const numOfRows = 10;
   const rowsTopOffset = 3;
   const numOfTiles = numOfCols * numOfRows;
   let tileNotHit = [];
-
   let ballMissed = 0;
   let gameIsOver = true;
   let scoreCardOn = true;
@@ -65,13 +52,12 @@ function paranoidCanvas() {
   function draw() {
     rect(context, 0, 0, w, h, 'black'); // draw canvas
     if (!gameIsOver) {
-      rect(context, paddleLeft, paddleTop,
-        paddleWidth, paddleHeight, 'white'); // draw paddle
+      rect(context, paddleLeft, paddleTop, paddleWidth, paddleHeight, 'white'); // draw paddle
 
       // draw tiles
       for (let rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
         for (let colIndex = 0; colIndex < numOfCols; colIndex++) {
-          const tileToBeDrawn = (rowIndex * numOfCols) + colIndex;
+          const tileToBeDrawn = rowIndex * numOfCols + colIndex;
           const cellX = colIndex * colWidth;
           const cellY = rowIndex * rowHeight;
 
@@ -139,17 +125,20 @@ function paranoidCanvas() {
         ballPosY > paddleTop &&
         ballPosY < paddleBottom
       ) {
-        const delta = (paddleLeft + (paddleWidth * 0.5)) - ballPosX;
+        const delta = paddleLeft + paddleWidth * 0.5 - ballPosX;
         ballMoveY *= -1;
         ballMoveX = -delta * 0.3;
       }
 
       // bounce in x direction
-      if (ballPosX < 0 + Math.abs(ballMoveX * 1.2) && ballMoveX < 0.0) ballMoveX *= -1;
+      if (ballPosX < 0 + Math.abs(ballMoveX * 1.2) && ballMoveX < 0.0)
+        ballMoveX *= -1;
       // bounce in x direction
-      if (ballPosX > w - Math.abs(ballMoveX * 1.2) && ballMoveX > 0.0) ballMoveX *= -1;
+      if (ballPosX > w - Math.abs(ballMoveX * 1.2) && ballMoveX > 0.0)
+        ballMoveX *= -1;
       // bounce in y direction
-      if (ballPosY < 0 + Math.abs(ballMoveY * 1.2) && ballMoveY < 0.0) ballMoveY *= -1;
+      if (ballPosY < 0 + Math.abs(ballMoveY * 1.2) && ballMoveY < 0.0)
+        ballMoveY *= -1;
       // bounce in y direction
       if (ballPosY > h) ballMoveY *= -1;
 
@@ -157,7 +146,7 @@ function paranoidCanvas() {
       if (ballPosY > paddleBottom && scoreCardOn) {
         ballMissed++;
 
-        gameIsOver = (ballMissed >= 3);
+        gameIsOver = ballMissed >= 3;
         scoreCardOn = false;
       }
       if (ballPosY > h && !gameIsOver) {
@@ -170,7 +159,12 @@ function paranoidCanvas() {
       const curRow = curTile.row;
       const curCol = curTile.col;
 
-      if (tileNotHit[curTileNum] && curCol >= 0 && curCol <= numOfCols - 1 && curRow >= 0) {
+      if (
+        tileNotHit[curTileNum] &&
+        curCol >= 0 &&
+        curCol <= numOfCols - 1 &&
+        curRow >= 0
+      ) {
         tileNotHit[curTileNum] = false;
 
         if (!tileRemaining()) {
@@ -182,33 +176,47 @@ function paranoidCanvas() {
         const prevRow = prevTile.row;
         const prevCol = prevTile.col;
 
-        const onlyColChanged = (prevRow === curRow && prevCol !== curCol);
-        const onlyRowChanged = (prevRow !== curRow && prevCol === curCol);
-        const bothChanged = (prevRow !== curRow && prevCol !== curCol);
+        const onlyColChanged = prevRow === curRow && prevCol !== curCol;
+        const onlyRowChanged = prevRow !== curRow && prevCol === curCol;
+        const bothChanged = prevRow !== curRow && prevCol !== curCol;
 
         if (onlyColChanged) {
           reverse('x');
         } else if (onlyRowChanged) {
           reverse('y');
         } else if (bothChanged) {
-          if (!tileNotHit[(prevBallPosY > ballPosY) ?
-              prevTileNum - numOfCols : prevTileNum + numOfCols]) {
+          if (
+            !tileNotHit[
+              prevBallPosY > ballPosY
+                ? prevTileNum - numOfCols
+                : prevTileNum + numOfCols
+            ]
+          ) {
             reverse('x');
           }
-          if (!tileNotHit[(prevBallPosX > ballPosX) ? prevTileNum - 1 : prevTileNum + 1]) {
+          if (
+            !tileNotHit[
+              prevBallPosX > ballPosX ? prevTileNum - 1 : prevTileNum + 1
+            ]
+          ) {
             reverse('y');
           }
           if (
-            tileNotHit[(prevBallPosY > ballPosY) ?
-              prevTileNum - numOfCols : prevTileNum + numOfCols] &&
-            tileNotHit[(prevBallPosX > ballPosX) ? prevTileNum - 1 : prevTileNum + 1]
+            tileNotHit[
+              prevBallPosY > ballPosY
+                ? prevTileNum - numOfCols
+                : prevTileNum + numOfCols
+            ] &&
+            tileNotHit[
+              prevBallPosX > ballPosX ? prevTileNum - 1 : prevTileNum + 1
+            ]
           ) {
             reverse('x');
             reverse('y');
           }
         }
       }
-      // end code, so that when this function will be called again, 
+      // end code, so that when this function will be called again,
       // this data will remain as previous value as history.
       prevBallPosX = ballPosX;
       prevBallPosY = ballPosY;
@@ -228,7 +236,7 @@ function paranoidCanvas() {
 
   function paddlePos() {
     paddleTop = h - paddleHeight - paddleBottomOffset;
-    paddleLeft = mousePosX - (paddleWidth * 0.5);
+    paddleLeft = mousePosX - paddleWidth * 0.5;
     paddleBottom = paddleTop + paddleHeight;
     paddleRight = paddleLeft + paddleWidth;
   }
@@ -244,7 +252,7 @@ function paranoidCanvas() {
       tileCol = col;
       tileRow = row;
     }
-    const num = (tileRow * numOfCols) + tileCol;
+    const num = tileRow * numOfCols + tileCol;
 
     return {
       col: tileCol,

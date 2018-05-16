@@ -1,18 +1,16 @@
-import {
-  drawBitmapCenteredWithRotation,
-  text,
-  rect
-} from '../Drawings';
-import {
-  winnerIs
-} from './helperFunctions';
-
+import { drawBitmapCenteredWithRotation, text, rect } from '../Drawings';
+import { winnerIs } from './helperFunctions';
 
 export const drawEverything = (
-  context, gameBaseDetails, htmlTags,
-  numOfRows, numOfCols,
-  colWidth, rowHeight,
-  blueCar, greenCar
+  context,
+  gameBaseDetails,
+  htmlTags,
+  numOfRows,
+  numOfCols,
+  colWidth,
+  rowHeight,
+  blueCar,
+  greenCar
 ) => {
   // draw tiles
   const w = context.canvas.width;
@@ -41,11 +39,19 @@ export const drawEverything = (
 
   // blue car
   drawBitmapCenteredWithRotation(
-    context, htmlTags[2], blueCarX, blueCarY, blueCarAngle
+    context,
+    htmlTags[2],
+    blueCarX,
+    blueCarY,
+    blueCarAngle
   );
   // green car
   drawBitmapCenteredWithRotation(
-    context, htmlTags[6], greenCarX, greenCarY, greenCarAngle
+    context,
+    htmlTags[6],
+    greenCarX,
+    greenCarY,
+    greenCarAngle
   );
 
   // level's label highlight
@@ -69,21 +75,41 @@ export const drawEverything = (
   if (winnerIs(blueCar, greenCar)) {
     // Finished message
     rect(context, 0, 40, w, 80, 'rgba(0,0,0,0.8)');
-    text(context,
+    text(
+      context,
       `${winnerIs(blueCar, greenCar)} won. Click to play again!`,
-      (w * 0.5) - 155, 88, 'white'
+      w * 0.5 - 155,
+      88,
+      'white'
     );
     // while race is running
   } else if (baseDetails.countdownTime() === 'Go...') {
     baseDetails.winningTime = baseDetails.lapTime(2);
   } else {
-    // Display Countdown time  
+    // Display Countdown time
     rect(context, 40, 40, w - 80, h - 80, 'rgba(0,0,0,0.2)');
-    text(context, baseDetails.countdownTime(), w * 0.5, 400, 'white', '250pt', 'center', 'bold');
+    text(
+      context,
+      baseDetails.countdownTime(),
+      w * 0.5,
+      400,
+      'white',
+      '250pt',
+      'center',
+      'bold'
+    );
   }
 
   // Race Timer
   rect(context, w - 80, h - 40, 80, 70, '#FF5500');
   rect(context, w - 80, h - 40, 78, 38, 'rgba(0,0,0,1)');
-  text(context, baseDetails.winningTime, w - 8, h - 12, '#FF5500', undefined, 'right');
+  text(
+    context,
+    baseDetails.winningTime,
+    w - 8,
+    h - 12,
+    '#FF5500',
+    undefined,
+    'right'
+  );
 };

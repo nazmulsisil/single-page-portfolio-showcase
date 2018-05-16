@@ -1,3 +1,5 @@
+// prettier-ignore
+
 export const getLayout = (whichLevel) => {
   const levels = {
     level1: [
