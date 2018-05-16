@@ -1,5 +1,6 @@
 import { events } from './events';
 import drawEverything from './drawEverything';
+import { SnowClass } from './SnowClass';
 import moveEverything from './moveEverything';
 import { rect, text } from '../Drawings';
 
@@ -12,7 +13,17 @@ function snowfallCanvas() {
   $.w = $.canvas.width;
   $.h = $.canvas.height;
   $.fps = 30;
-  $.snows = [];
+  $.snowsArr = [];
+  $.numOfSnows = 0;
+
+  $.htmlTag = document.createElement('img');
+  $.htmlTag.addEventListener('load', imgLoadedInHtml);
+
+  function imgLoadedInHtml(e) {
+    imgLoadedSoRunOtherStuffs();
+  }
+
+  $.htmlTag.src = './../img/snowfall.png';
 
   events($);
 
@@ -20,7 +31,13 @@ function snowfallCanvas() {
   rect($.context, 0, 0, $.w, $.h);
   text($.context, 'Click to continue!', 100, 80, 'white');
 
-  setInterval(repeatCall, 1000 / $.fps);
+  function imgLoadedSoRunOtherStuffs() {
+    for (let i = 0; i < $.numOfSnows; i++) {
+      $.snowsArr.push(new SnowClass($));
+    }
+
+    setInterval(repeatCall, 1000 / $.fps);
+  }
 
   function repeatCall() {
     drawEverything($);
