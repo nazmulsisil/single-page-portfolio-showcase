@@ -1,3 +1,5 @@
 export const events = $ => {
-  console.log('im from events');
+  $.canvas.addEventListener('click', () => {
+    $.started = true;
+  });
 };
