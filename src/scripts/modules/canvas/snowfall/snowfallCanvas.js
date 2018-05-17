@@ -17,14 +17,24 @@ function snowfallCanvas() {
   $.snowsArr = [];
   $.htmlTag = document.createElement('img');
   $.htmlTag.addEventListener('load', () => imgLoadedSoRunOtherStuffs());
-  $.htmlTag.src = `./../img/snowfall${r(2, 1)}.png`;
+  $.htmlTag.src = './../img/snowfall.png';
   events($);
 
   // Initial load of the black canvas
   rect($.context, 0, 0, $.w, $.h);
-  text($.context, 'Click to see animated snowfall...!', 100, 80, 'white');
+  text(
+    $.context,
+    'Loading...',
+    $.w * 0.5,
+    $.h * 0.5,
+    'white',
+    undefined,
+    'center'
+  );
 
   function imgLoadedSoRunOtherStuffs() {
+    rect($.context, 0, 0, $.w, $.h);
+    text($.context, 'Click to see animated snowfall...!', 100, 80, 'white');
     setInterval(repeatCall, 1000 / $.fps);
   }
 
