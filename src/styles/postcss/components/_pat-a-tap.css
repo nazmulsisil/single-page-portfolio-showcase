@@ -6,3 +6,11 @@
     background: black;
   }
 }
+
+.patATap-message {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: 2rem;
+  color: $text-4;
+}

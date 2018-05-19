@@ -1,8 +1,9 @@
-import $ from "jquery";
+import $ from 'jquery';
+import { getInFocusMark } from '../globalHelper';
 
 class List {
   constructor() {
-    this.listElements = $(".list__item");
+    this.listElements = $('.list__item');
     this.events();
   }
 
@@ -11,9 +12,19 @@ class List {
   }
 
   toggleFewClasses() {
-    const elementToDel = $("html").find("#" + $(this).attr("data-todel"));
-    $(this).toggleClass("list__item--active");
-    $(elementToDel).toggleClass("container--hidden");
+    const elementToDel = $('html').find('#' + $(this).attr('data-todel'));
+    $(this).toggleClass('list__item--active');
+    $(elementToDel).toggleClass('container--hidden');
+
+    const containerLoadTime = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue('--container-load-time');
+
+    const delayToCallInFocusFunction = +containerLoadTime + 10;
+
+    setTimeout(() => {
+      getInFocusMark();
+    }, delayToCallInFocusFunction);
   }
 }
 

@@ -7,20 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="./styles/style.css">
-  <title>Single page portfolio showcsase</title>
-
-
-  <!-- <script type="text/paperscript" canvas="patATap__canvas">
-    var path = new Path();
-    path.strokeColor = 'red';
-    var start = new Point(0, 100);
-    path.moveTo(start);
-    path.lineTo(start + [500, -50]);
-//    var circle2 = new Path.Circle(new Point(50, 50), 300);
-//    circle2.fillColor = 'purple';
-//    var myCircle = new Path.Circle(new Point(100, 70), 10);
-//    myCircle.fillColor = 'black';
-  </script> -->
+  <title>Single page portfolio showcase</title>
 
 </head>
 
@@ -31,23 +18,23 @@
     <div class="design-list">
       <div class="list">
         <div class="list__headline">Projects</div>
-        <li class="list__item" data-todel="notification">components - Notification bar</li>
-        <li class="list__item" data-todel="spinner">components - Spinner</li>
-        <li class="list__item" data-todel="append-div">components - Append div</li>
-        <li class="list__item" data-todel="drop-down">components - Dropdown menu</li>
-        <li class="list__item" data-todel="reaction">game - Reaction</li>
-        <li class="list__item" data-todel="tennis">game - tennis</li>
-        <li class="list__item" data-todel="paranoid">game - paranoid</li>
-        <li class="list__item" data-todel="racing">game - Racing</li>
-        <li class="list__item" data-todel="wander">game - Wander</li>
-        <li class="list__item" data-todel="snowfall">Animation - snowfall</li>
+        <li class="list__item list__item--active" data-todel="notification">components - Notification bar</li>
+        <li class="list__item list__item--active" data-todel="spinner">components - Spinner</li>
+        <li class="list__item list__item--active" data-todel="append-div">components - Append div</li>
+        <li class="list__item list__item--active" data-todel="drop-down">components - Dropdown menu</li>
+        <li class="list__item list__item--active" data-todel="reaction">game - Reaction</li>
+        <li class="list__item list__item--active" data-todel="tennis">game - tennis</li>
+        <li class="list__item list__item--active" data-todel="paranoid">game - paranoid</li>
+        <li class="list__item list__item--active" data-todel="racing">game - Racing</li>
+        <li class="list__item list__item--active" data-todel="wander">game - Wander</li>
+        <li class="list__item list__item--active" data-todel="snowfall">Animation - snowfall</li>
         <li class="list__item list__item--active" data-todel="patATap">Animation - patATap clone</li>
       </div>
     </div>
 
     <div class="design-items">
 
-      <div class="container container--hidden" id="notification">
+      <div class="container" id="notification">
         <div class="container__content">
           <ul class="notification-bar">
 
@@ -134,7 +121,7 @@
         </div>
       </div>
 
-      <div class="container container--hidden" id="spinner">
+      <div class="container" id="spinner">
         <div class="content">
           <div class="spinners">
             <div class="spinner1">
@@ -144,7 +131,7 @@
         </div>
       </div>
 
-      <div class="container container--hidden" id="append-div">
+      <div class="container" id="append-div">
         <div class="content">
           <div class="click-box">
 
@@ -152,7 +139,7 @@
         </div>
       </div>
 
-      <div class="container container--hidden" id="drop-down">
+      <div class="container" id="drop-down">
         <div class="content">
           <div class="navbar">
 
@@ -182,7 +169,7 @@
         </div>
       </div>
 
-      <div class="container container--hidden colored" id="reaction">
+      <div class="container colored" id="reaction">
         <div class="reaction">
           <div class="info">
             <div class="info__reaction-time">
@@ -198,19 +185,19 @@
         </div>
       </div>
 
-      <div class="container container--hidden" id="tennis">
+      <div class="container" id="tennis">
         <canvas id="tennis-canvas" width="800" height="600"></canvas>
       </div>
 
-      <div class="container container--hidden" id="paranoid">
+      <div class="container" id="paranoid">
         <canvas id="paranoid-canvas" width="800" height="600"></canvas>
       </div>
 
-      <div class="container colored container--hidden" id="racing">
+      <div class="container colored" id="racing">
         <canvas id="racing-canvas" width="800" height="600"></canvas>
       </div>
 
-      <div class="container container--dirCol colored container--hidden" id="wander">
+      <div class="container container--dirCol colored" id="wander">
         <div class="wander__input-group" id="wander-g">
           <label for="numOfBalls">Number of balls (max 800): </label>
           <input class="wander__input" min=0 max=800 id="numOfBalls" type="number">
@@ -220,7 +207,7 @@
 
       </div>
 
-      <div class="container colored container--hidden" id="snowfall">
+      <div class="container colored" id="snowfall">
         <canvas id="snowfall-canvas" width="800" height="600">
         </canvas>
       </div>
@@ -228,6 +215,9 @@
       <div class="container" id="patATap">
         <canvas id="patATap__canvas" resize>
         </canvas>
+        <p class="patATap-message">
+          Hit a letter in your keyboard...
+        </p>
       </div>
 
     </div>

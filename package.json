@@ -6,8 +6,7 @@
   "license": "MIT",
   "scripts": {
     "server": "live-server public",
-    "watch:sass":
-      "node-sass ./src/styles/sass/from_sass.scss ./public/styles/style.css -w"
+    "watch:sass": "node-sass ./src/styles/sass/from_sass.scss ./public/styles/style.css -w"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",

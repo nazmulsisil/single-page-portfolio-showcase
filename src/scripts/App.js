@@ -5,6 +5,10 @@ import ClickFn from './modules/AppearOnClick';
 import List from './modules/List';
 import Reaction from './modules/Reaction';
 import { initCanvas } from './modules/canvas/Canvas';
+import events from './events';
+import { getInFocusMark } from './globalHelper';
+
+events();
 
 const clickFn = new ClickFn(
   $('#append-div'),
@@ -16,4 +20,5 @@ const reaction = new Reaction();
 
 window.addEventListener('load', () => {
   initCanvas();
+  getInFocusMark();
 });
