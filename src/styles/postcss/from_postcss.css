@@ -13,5 +13,6 @@
 @import './components/_design-items';
 @import './components/_wander';
 @import './components/_list';
+@import './components/_pat-a-tap';
 @import './layout/_wrapper';
 @import './base/_utilities';

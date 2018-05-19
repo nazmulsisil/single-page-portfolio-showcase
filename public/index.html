@@ -7,7 +7,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="./styles/style.css">
-  <title>Notification Spinner Modal</title>
+  <title>Single page portfolio showcsase</title>
+
+
+  <!-- <script type="text/paperscript" canvas="patATap__canvas">
+    var path = new Path();
+    path.strokeColor = 'red';
+    var start = new Point(0, 100);
+    path.moveTo(start);
+    path.lineTo(start + [500, -50]);
+//    var circle2 = new Path.Circle(new Point(50, 50), 300);
+//    circle2.fillColor = 'purple';
+//    var myCircle = new Path.Circle(new Point(100, 70), 10);
+//    myCircle.fillColor = 'black';
+  </script> -->
+
 </head>
 
 <body>
@@ -26,7 +40,8 @@
         <li class="list__item" data-todel="paranoid">game - paranoid</li>
         <li class="list__item" data-todel="racing">game - Racing</li>
         <li class="list__item" data-todel="wander">game - Wander</li>
-        <li class="list__item list__item--active" data-todel="snowfall">Animation - snowfall</li>
+        <li class="list__item" data-todel="snowfall">Animation - snowfall</li>
+        <li class="list__item list__item--active" data-todel="patATap">Animation - patATap clone</li>
       </div>
     </div>
 
@@ -205,17 +220,18 @@
 
       </div>
 
-      <div class="container colored" id="snowfall">
+      <div class="container colored container--hidden" id="snowfall">
         <canvas id="snowfall-canvas" width="800" height="600">
         </canvas>
       </div>
 
-
+      <div class="container" id="patATap">
+        <canvas id="patATap__canvas" resize>
+        </canvas>
+      </div>
 
     </div>
   </div>
-
-
 
   <script src="./scripts/main.js"></script>
 </body>

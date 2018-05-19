@@ -4,9 +4,7 @@ import $ from 'jquery';
 import ClickFn from './modules/AppearOnClick';
 import List from './modules/List';
 import Reaction from './modules/Reaction';
-import {
-  initCanvas
-} from './modules/canvas/Canvas';
+import { initCanvas } from './modules/canvas/Canvas';
 
 const clickFn = new ClickFn(
   $('#append-div'),

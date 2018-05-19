@@ -1,6 +1,6 @@
 .container {
   backface-visibility: hidden;
-  min-height: calc(100vh - ($bodyPadding * 2));
+  min-height: $containers-min-height;
   margin-left: $bodyPadding;
   margin-top: 0;
   margin-right: 0;

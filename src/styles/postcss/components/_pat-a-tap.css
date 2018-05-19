@@ -1,0 +1,8 @@
+#patATap {
+  height: $containers-min-height;
+  &__canvas {
+    height: 100%;
+    width: 100%;
+    background: black;
+  }
+}

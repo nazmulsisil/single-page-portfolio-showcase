@@ -11,3 +11,5 @@ $list-bg: #eef2f3;
 $text-2: #474848;
 $text-3: #5f6061;
 $text-4: #777979;
+
+$containers-min-height: calc(100vh - ($bodyPadding * 2));

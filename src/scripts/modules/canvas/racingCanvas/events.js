@@ -1,4 +1,5 @@
 import { getLayout } from './layouts';
+import { getPosition } from './../../../globalHelper';
 
 export const events = (
   context,
@@ -24,18 +25,33 @@ export const events = (
   document.addEventListener('keyup', keyReleased);
 
   function keyPressed(evt) {
-    const pressedKey = evt.keyCode;
-    if (blueCarKeys.includes(pressedKey) || greenCarKeys.includes(pressedKey)) {
-      evt.preventDefault();
+    // checking if the racing canvas is being seen on screen or not.
+    // if not on screen do not run event listener for this game,
+    // so that other part of the page's game can use those keys.
+    const canvasPosition = getPosition(canvas);
+    if (
+      canvas.clientHeight >= canvas.height &&
+      canvasPosition.top > -canvas.height * 0.3 &&
+      canvasPosition.top < window.innerHeight * 0.3
+    ) {
+      const pressedKey = evt.keyCode;
+      // checking if the pressed key is being used within this
+      // game, otherwise don't prevent default.
+      if (
+        blueCarKeys.includes(pressedKey) ||
+        greenCarKeys.includes(pressedKey)
+      ) {
+        evt.preventDefault();
+      }
+
+      // determine which car to move on which keys
+      const car = (function() {
+        if (blueCarKeys.includes(pressedKey)) return blue;
+        if (greenCarKeys.includes(pressedKey)) return green;
+      })();
+
+      flipGear(car, pressedKey, true);
     }
-
-    // determine which car to move on which keys
-    const car = (function() {
-      if (blueCarKeys.includes(pressedKey)) return blue;
-      if (greenCarKeys.includes(pressedKey)) return green;
-    })();
-
-    flipGear(car, pressedKey, true);
   }
 
   function keyReleased(evt) {

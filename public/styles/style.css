@@ -523,6 +523,14 @@ body {
       background-color: rgba(238,242,243, 1);
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
+#patATap {
+  height: calc(100vh - (1rem * 2));
+}
+#patATap__canvas {
+    height: 100%;
+    width: 100%;
+    background: black;
+  }
 .wrapper {
   margin: 1rem;
   display: flex;
