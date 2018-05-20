@@ -5,7 +5,9 @@
   left: $bodyPadding;
   width: $left-side-width;
   background: #b9c7d3;
-  min-height: calc(100vh - ($bodyPadding * 2));
+  height: calc(100vh - ($bodyPadding * 2));
+  max-height: calc(100vh - ($bodyPadding * 2));
+  overflow-y: auto;
 
   &__headline {
     font-size: 1.5rem;
