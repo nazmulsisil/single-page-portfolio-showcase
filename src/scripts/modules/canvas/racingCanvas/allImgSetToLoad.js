@@ -1,30 +1,34 @@
-import {
-  findObjFromArray
-} from './helperFunctions';
+import { findObjFromArray } from './helperFunctions';
 
-export const allImgSetToLoad = (gameBaseDetails) => {
+export const allImgSetToLoad = gameBaseDetails => {
   const htmlTags = {};
   const uniquePicCodes = [...new Set(gameBaseDetails.layout)];
   const picturesToLoad = uniquePicCodes.length;
 
   const picCodeDetails = [];
-  picCodeDetails.push(new PicDetails('road', 0, '../img/road.png'));
-  picCodeDetails.push(new PicDetails('wall', 1, '../img/tile.png'));
-  picCodeDetails.push(new PicDetails('blueCar', 2, '../img/blue_car.png'));
-  picCodeDetails.push(new PicDetails('greenCar', 6, '../img/green_car.png'));
+  picCodeDetails.push(new PicDetails('road', 0, './../img/road.png'));
+  picCodeDetails.push(new PicDetails('wall', 1, './../../img/tile.png'));
+  picCodeDetails.push(new PicDetails('blueCar', 2, 'img/blue_car.png'));
+  picCodeDetails.push(new PicDetails('greenCar', 6, './img/green_car.png'));
   picCodeDetails.push(new PicDetails('goal', 3, '../img/goal.png'));
   picCodeDetails.push(new PicDetails('tree', 4, '../img/tree.png'));
   picCodeDetails.push(new PicDetails('flag', 5, '../img/flag.png'));
   picCodeDetails.push(new PicDetails('flag', 7, '../img/blocker.png'));
   // immediately end the function if all code not found in picture set picCodeDetails array
   if (!allCodesFoundInPicCodeDetailsArray()) {
-    console.log('PicCodes used in the layout was not found in picCodeDetails array');
+    console.log(
+      'PicCodes used in the layout was not found in picCodeDetails array'
+    );
     return false;
   }
   // create htmlTags object with all picCode used and making their respective src = filePath
   uniquePicCodes.forEach(picCode => {
     htmlTags[picCode] = document.createElement('img');
-    htmlTags[picCode].src = findObjFromArray(picCodeDetails, 'layoutCode', picCode).filePath;
+    htmlTags[picCode].src = findObjFromArray(
+      picCodeDetails,
+      'layoutCode',
+      picCode
+    ).filePath;
   });
 
   // mini helper function
@@ -50,6 +54,6 @@ export const allImgSetToLoad = (gameBaseDetails) => {
   return {
     htmlTags,
     uniquePicCodes,
-    picturesToLoad,
+    picturesToLoad
   };
 };
