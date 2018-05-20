@@ -96,7 +96,18 @@ body {
   color: #303030;
   box-sizing: border-box;
   overflow-y: scroll;
+  font-family: 'verdana', sans-serif;
 }
+.heading__primary {
+    position: absolute;
+    top: 4vh;
+    font-size: 2.5vh;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+.colored .heading__primary {
+    color: white;
+  }
 .container {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -465,7 +476,7 @@ body {
   flex-grow: 1;
 }
 .wander__input-group {
-    color: rgb(161, 145, 250);
+    color: white;
     font-family: sans-serif;
     font-size: 1.4rem;
     width: 800px;
@@ -483,9 +494,6 @@ body {
     color: #777979;
     font-weight: bold;
   }
-.sdf {
-  color: rgb(161, 145, 250);
-}
 .list {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -507,7 +515,6 @@ body {
     color: white;
   }
 .list__item {
-    cursor: pointer;
     text-transform: uppercase;
     word-break: break-all;
     -webkit-hyphens: auto;
@@ -516,7 +523,7 @@ body {
     list-style: none;
     font-size: 1.4rem;
     margin: 0.5rem;
-    padding: 1rem 2rem;
+    /* padding: 1rem 2rem; */
     color: #777979;
     background-color: rgba(238,242,243, 0.3);
     border-radius: 2px;
@@ -532,7 +539,7 @@ body {
       background-color: rgb(0, 207, 0);
       background-color: rgba(0, 0, 0, 0.5);
       color: white;
-      font-weight: bold;
+      /* font-weight: bold; */
       /* font-style: italic; */
 
       /* &::after {
@@ -554,6 +561,18 @@ body {
         box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
       } */
     }
+.list__item a {
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+      padding: 1rem 2rem;
+      transition: all 0.3s;
+      height: 100%;
+      width: 100%;
+    }
+.list__item a:hover {
+        padding-left: 3rem;
+      }
 #patATap {
   height: calc(100vh - (1rem * 2));
 }
@@ -563,6 +582,7 @@ body {
     background: black;
   }
 .patATap-message {
+  font-family: sans-serif;
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;

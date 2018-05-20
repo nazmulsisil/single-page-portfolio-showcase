@@ -1,6 +1,6 @@
 .wander {
   &__input-group {
-    color: rgb(161, 145, 250);
+    color: white;
     font-family: sans-serif;
     font-size: 1.4rem;
     width: 800px;
@@ -19,8 +19,4 @@
     color: $text-4;
     font-weight: bold;
   }
-}
-
-.sdf {
-  color: rgb(161, 145, 250);
 }

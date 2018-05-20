@@ -3,12 +3,18 @@ import { getInFocusMark } from '../globalHelper';
 
 class List {
   constructor() {
+    this.listAnchor = $('.list__item a');
     this.listElements = $('.list__item');
     this.events();
   }
 
   events() {
-    this.listElements.click(this.toggleFewClasses);
+    // this.listElements.click(this.toggleFewClasses);
+    this.listAnchor.click(this.anchorClicked);
+  }
+
+  anchorClicked(e) {
+    e.stopPropagation();
   }
 
   toggleFewClasses() {

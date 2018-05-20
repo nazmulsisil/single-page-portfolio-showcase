@@ -1,0 +1,13 @@
+.heading {
+  &__primary {
+    position: absolute;
+    top: 4vh;
+    font-size: 2.5vh;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .colored &__primary {
+    color: white;
+  }
+}

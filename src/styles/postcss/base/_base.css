@@ -16,4 +16,5 @@ body {
   color: $font-light;
   box-sizing: border-box;
   overflow-y: scroll;
+  font-family: 'verdana', sans-serif;
 }

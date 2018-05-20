@@ -2,6 +2,7 @@
 @import './abstracts/_animations';
 @import './abstracts/_mixins';
 @import './base/_base';
+@import './base/_typography';
 @import './layout/_container';
 @import './components/_icon-holder';
 @import './components/_notification-bar';

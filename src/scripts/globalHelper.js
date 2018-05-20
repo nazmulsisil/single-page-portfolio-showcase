@@ -34,3 +34,17 @@ export const getInFocusMark = () => {
   );
   containersArr.forEach(el => inFocus(el));
 };
+
+export const shouldHeadingAppear = () => {
+  const headingsPrimaryDom = document.getElementsByClassName(
+    'heading__primary'
+  );
+  for (let i = 0; i < headingsPrimaryDom.length; i++) {
+    const el = headingsPrimaryDom[i];
+    if (window.innerHeight < 800) {
+      el.style.display = 'none';
+    } else {
+      el.style.display = 'block';
+    }
+  }
+};
