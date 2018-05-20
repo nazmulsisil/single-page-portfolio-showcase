@@ -8,8 +8,8 @@ import patATap from './patATap/patATap';
 export const initCanvas = () => {
   tennisCanvas();
   paranoidCanvas();
-  racingCanvas();
   wander();
-  snowfallCanvas();
   patATap();
+  snowfallCanvas();
+  racingCanvas();
 };
