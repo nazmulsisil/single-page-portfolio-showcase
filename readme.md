@@ -1,1 +1,1 @@
-# These are the things I can do. You are allowed to take it from here and use for you
+# These are the things I can do. You can take it from here and use for you if you need to
