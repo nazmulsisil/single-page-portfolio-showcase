@@ -17,7 +17,7 @@ function snowfallCanvas() {
   $.snowsArr = [];
   $.htmlTag = document.createElement('img');
   $.htmlTag.addEventListener('load', () => imgLoadedSoRunOtherStuffs());
-  $.htmlTag.src = './../img/snowfall.png';
+  $.htmlTag.src = '../img/snowfall.png';
   events($);
 
   // Initial load of the black canvas
