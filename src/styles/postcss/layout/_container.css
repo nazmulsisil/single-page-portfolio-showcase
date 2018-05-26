@@ -16,13 +16,23 @@
     flex-direction: column;
   }
 
-  &.colored {
+  &--colored {
     background: radial-gradient(#6441a5, #2a0845);
   }
+
+  &--white {
+    background: #fff;
+  }
+
+  &--no-flex {
+    display: block;
+  }
+
   transform-origin: center top;
   transition: all 0.4s ease-in-out;
   transition-duration: calc(var(--container-load-time) * 1ms);
   opacity: 1;
+
   &:not(:last-child) {
     margin-bottom: $bodyPadding;
   }
@@ -30,6 +40,7 @@
   &:last-child {
     transform-origin: center bottom;
   }
+
   &--hidden {
     transform: scaleY(0);
     &,

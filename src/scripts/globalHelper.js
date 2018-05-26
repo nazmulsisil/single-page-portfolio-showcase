@@ -30,7 +30,8 @@ export const getCssTransformValue = whichElementsCss => {
 
 export const getInFocusMark = () => {
   const containersArr = Array.from(
-    document.getElementsByClassName('container')
+    // document.getElementsByClassName('container')
+    document.querySelectorAll('.design-item .container')
   );
   containersArr.forEach(el => inFocus(el));
 };

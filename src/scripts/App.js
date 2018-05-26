@@ -7,6 +7,7 @@ import Reaction from './modules/Reaction';
 import { initCanvas } from './modules/canvas/Canvas';
 import events from './events';
 import { getInFocusMark } from './globalHelper';
+import budget from './modules/budget/budget';
 
 events();
 
@@ -20,5 +21,6 @@ const reaction = new Reaction();
 
 window.addEventListener('load', () => {
   initCanvas();
+  budget();
   getInFocusMark();
 });

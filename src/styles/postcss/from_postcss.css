@@ -15,5 +15,6 @@
 @import './components/_wander';
 @import './components/_list';
 @import './components/_pat-a-tap';
+@import './components/_budget';
 @import './layout/_wrapper';
 @import './base/_utilities';
