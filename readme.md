@@ -1,1 +1,3 @@
-# These are the things I can do. You can take it from here and use for you if you need to
+## These are examples of the things I can do. Take a look...
+
+# GitHub Pages: https://nazmulsisil.github.io/single-page-portfolio-showcase/
