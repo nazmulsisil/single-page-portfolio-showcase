@@ -49,3 +49,15 @@ export const shouldHeadingAppear = () => {
     }
   }
 };
+
+export const noSmallScreen = () => {
+  const wrapperMain = document.getElementsByClassName('wrapper')[0];
+  const noSmallScr = document.getElementsByClassName('no-small-screen')[0];
+  if (window.innerWidth < 1400) {
+    wrapperMain.style.display = 'none';
+    noSmallScr.style.display = 'flex';
+  } else {
+    noSmallScr.style.display = 'none';
+    wrapperMain.style.display = 'flex';
+  }
+};

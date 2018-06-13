@@ -17,4 +17,5 @@
 @import './components/_pat-a-tap';
 @import './components/_budget';
 @import './layout/_wrapper';
+@import './layout/_no-small-screen';
 @import './base/_utilities';

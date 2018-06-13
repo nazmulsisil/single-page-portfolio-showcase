@@ -6,7 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public', 'scripts'),
     filename: '[Name].js'
   },
-  mode: 'production', // development
+  mode: 'development',
 
   module: {
     rules: [
@@ -19,5 +19,6 @@ module.exports = {
         }
       }
     ]
-  } // devtool: 'cheap-module-eval-source-map'
+  },
+  devtool: 'cheap-module-eval-source-map'
 };

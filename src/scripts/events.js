@@ -1,13 +1,15 @@
-import { inFocus, shouldHeadingAppear } from './globalHelper';
+import { inFocus, shouldHeadingAppear, noSmallScreen } from './globalHelper';
 
 const events = () => {
   const containers = document.getElementsByClassName('container');
 
   window.addEventListener('load', () => {
+    noSmallScreen();
     shouldHeadingAppear();
   });
 
   window.addEventListener('resize', () => {
+    noSmallScreen();
     shouldHeadingAppear();
   });
 
