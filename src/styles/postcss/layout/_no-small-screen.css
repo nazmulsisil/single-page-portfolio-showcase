@@ -12,7 +12,8 @@
   font-size: 2rem;
   text-align: center;
   line-height: 3.5rem;
-  display: flex;
+  font-weight: bold;
+  display: none;
   margin: 1rem;
   padding: 2rem;
 }
