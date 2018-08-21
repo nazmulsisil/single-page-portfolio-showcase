@@ -1,3 +1,3 @@
-#### These are examples of the things I can do. Please take a look...
+#### Some of my works are here. Please take a look!
 
 ##### GitHub Pages: https://nazmulsisil.github.io/single-page-portfolio-showcase/
